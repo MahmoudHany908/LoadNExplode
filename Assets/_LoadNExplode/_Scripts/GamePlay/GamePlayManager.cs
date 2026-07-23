@@ -1,20 +1,26 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class GamePlayManager : MonoBehaviour
 {
-    [SerializeField] private GameObject deathUIPrefab;
+    [FormerlySerializedAs("deathUIPrefab")]
+    [SerializeField] private GameObject spawnMapUIPrefab;
+
+    private Player deadPlayer;
+    private GameObject activeSpawnMapUI;
 
     private void OnEnable()
     {
         EventBus.Subscribe<PlayerDeathEvent>(OnPlayerDeath);
         EventBus.Subscribe<OnRestartGameButtonPressedEvent>(OnRestartGameButtonPressed);
+        EventBus.Subscribe<RequestSpawnEvent>(OnSpawnRequested);
     }
     private void OnDisable()
     {
         EventBus.Unsubscribe<PlayerDeathEvent>(OnPlayerDeath);
         EventBus.Unsubscribe<OnRestartGameButtonPressedEvent>(OnRestartGameButtonPressed);
+        EventBus.Unsubscribe<RequestSpawnEvent>(OnSpawnRequested);
 
     }
 
@@ -28,9 +34,25 @@ public class GamePlayManager : MonoBehaviour
 
     private void OnPlayerDeath(PlayerDeathEvent evt)
     {
-        //do some shit first before showing the death UI
-
+        deadPlayer = evt.Player;
         Time.timeScale = 0f;
-        Instantiate(deathUIPrefab);
+
+        if (activeSpawnMapUI == null && spawnMapUIPrefab != null)
+            activeSpawnMapUI = Instantiate(spawnMapUIPrefab);
+    }
+
+    private void OnSpawnRequested(RequestSpawnEvent evt)
+    {
+        if (deadPlayer == null || evt.SpawnPoint == null)
+            return;
+
+        deadPlayer.Respawn(evt.SpawnPoint.position);
+
+        if (activeSpawnMapUI != null)
+            Destroy(activeSpawnMapUI);
+
+        Time.timeScale = 1f;
+        EventBus.Publish(new PlayerSpawnedEvent(deadPlayer, evt.SpawnPoint));
+        deadPlayer = null;
     }
 }

@@ -5,15 +5,17 @@ using UnityEngine.InputSystem;
 public class Player : UnitBase
 {
     [SerializeField] private GameObject Bomb;
+    [SerializeField] private int maxHealth = 100;
     private PlayerMovement playerMovement;
 
     private PlayerVisuals playerVisuals;
 
-    private int Health = 100;
+    private int Health;
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
         playerVisuals = GetComponent<PlayerVisuals>();
+        Health = maxHealth;
 
     }
 
@@ -37,6 +39,15 @@ public class Player : UnitBase
     public override void Die()
     {
         EventBus.Publish(new PlayerDeathEvent(this, transform.position));
+    }
+
+    public void Respawn(Vector3 spawnPosition)
+    {
+        Health = maxHealth;
+        transform.position = spawnPosition;
+
+        if (TryGetComponent(out Rigidbody rb))
+            rb.linearVelocity = Vector3.zero;
     }
 
 
