@@ -7,7 +7,6 @@ public class NPCController : MonoBehaviour
     [SerializeField] private NPCDefinition definition;
     [SerializeField] private Transform eye;                // vision origin - defaults to this transform
     [SerializeField] private Transform player;              // auto-found via "Player" tag if left empty
-    [SerializeField] private Transform[] patrolPoints;
 
     private NPCContext _context;
     private NPCStateMachine _stateMachine;
@@ -39,7 +38,7 @@ public class NPCController : MonoBehaviour
             Definition = definition,
             StateMachine = _stateMachine,
             States = new NPCStates(),
-            PatrolPoints = patrolPoints
+            SpawnPosition = transform.position
         };
     }
 
@@ -73,5 +72,9 @@ public class NPCController : MonoBehaviour
         Quaternion rightRot = Quaternion.AngleAxis(definition.VisionFOVAngle * 0.5f, Vector3.up);
         Gizmos.DrawRay(originT.position, leftRot * forward);
         Gizmos.DrawRay(originT.position, rightRot * forward);
+
+        Gizmos.color = Color.cyan;
+        Vector3 wanderCenter = Application.isPlaying ? _context.SpawnPosition : transform.position;
+        Gizmos.DrawWireSphere(wanderCenter, definition.PatrolRadius);
     }
 }

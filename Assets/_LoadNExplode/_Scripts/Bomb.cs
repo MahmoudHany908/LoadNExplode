@@ -27,7 +27,7 @@ public class Bomb : MonoBehaviour
             if (collider.TryGetComponent(out IDamageable damageable))
             {
                 _collidersInRange.Add(collider);
-                damageable.TakeDamage(50);
+                damageable.TakeDamage(100);
             }
         }
         Destroy(gameObject);
