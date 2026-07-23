@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class NPCContext
@@ -11,19 +11,22 @@ public class NPCContext
     public NPCStateMachine StateMachine;
     public NPCStates States;
 
+    public Vector3 SpawnPosition;
+
     public bool CanSeePlayer;
     public Vector3 LastKnownPlayerPosition;
     public float SearchTimer;
 
-    public Transform[] PatrolPoints;
-    private int _patrolIndex = -1;
-
     public Vector3 NextPatrolPoint()
     {
-        if (PatrolPoints == null || PatrolPoints.Length == 0)
-            return Self.position;
+        Vector3 randomDir = Random.insideUnitSphere * Definition.PatrolRadius;
+        randomDir += SpawnPosition;
 
-        _patrolIndex = (_patrolIndex + 1) % PatrolPoints.Length;
-        return PatrolPoints[_patrolIndex].position;
+        if (NavMesh.SamplePosition(randomDir, out NavMeshHit hit, Definition.PatrolRadius, NavMesh.AllAreas))
+        {
+            return hit.position;
+        }
+
+        return SpawnPosition;
     }
 }

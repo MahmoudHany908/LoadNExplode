@@ -10,7 +10,7 @@ public class Player : UnitBase
 
     private PlayerVisuals playerVisuals;
 
-    private int Health;
+    private int Health = 100;
     void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();

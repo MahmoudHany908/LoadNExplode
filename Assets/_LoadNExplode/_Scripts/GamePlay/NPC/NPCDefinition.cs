@@ -17,6 +17,9 @@ public class NPCDefinition : ScriptableObject
     public float ChaseSpeed = 4.5f;
     public float FleeSpeed = 5f;
 
+    [Header("PatrolSettings")]
+    public float PatrolRadius = 30f;
+
     [Header("Vision")]
     public float VisionRange = 10f;
     [Range(0f, 360f)] public float VisionFOVAngle = 90f;
