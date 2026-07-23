@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Enemy : UnitBase
+public class Person : UnitBase
 {
     private int Health = 100;
 
