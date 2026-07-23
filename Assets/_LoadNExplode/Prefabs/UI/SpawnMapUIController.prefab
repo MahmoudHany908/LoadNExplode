@@ -743,4 +743,7 @@ MonoBehaviour:
   spawnButtons:
   - {fileID: 6702278328006569187}
   - {fileID: 7652423225532501277}
-  spawnPoints: []
+  spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

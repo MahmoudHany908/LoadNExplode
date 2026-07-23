@@ -5,10 +5,9 @@ using UnityEngine.Serialization;
 public class GamePlayManager : MonoBehaviour
 {
     [FormerlySerializedAs("deathUIPrefab")]
-    [SerializeField] private GameObject spawnMapUIPrefab;
+    [SerializeField] private GameObject spawnMapUI;
 
     private Player deadPlayer;
-    private GameObject activeSpawnMapUI;
 
     private void OnEnable()
     {
@@ -37,8 +36,8 @@ public class GamePlayManager : MonoBehaviour
         deadPlayer = evt.Player;
         Time.timeScale = 0f;
 
-        if (activeSpawnMapUI == null && spawnMapUIPrefab != null)
-            activeSpawnMapUI = Instantiate(spawnMapUIPrefab);
+        if (spawnMapUI != null)
+            spawnMapUI.SetActive(true);
     }
 
     private void OnSpawnRequested(RequestSpawnEvent evt)
@@ -48,8 +47,8 @@ public class GamePlayManager : MonoBehaviour
 
         deadPlayer.Respawn(evt.SpawnPoint.position);
 
-        if (activeSpawnMapUI != null)
-            Destroy(activeSpawnMapUI);
+        if (spawnMapUI != null)
+            spawnMapUI.SetActive(false);
 
         Time.timeScale = 1f;
         EventBus.Publish(new PlayerSpawnedEvent(deadPlayer, evt.SpawnPoint));
