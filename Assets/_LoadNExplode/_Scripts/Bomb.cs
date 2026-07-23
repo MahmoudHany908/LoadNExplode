@@ -10,10 +10,19 @@ public class Bomb : MonoBehaviour
 
     private List<Collider> _collidersInRange = new List<Collider>();
 
-
-    private IEnumerator Start()
+    private void Start()
     {
-        transform.localScale *= _explosionRadius;
+
+        TriggerExplosion();
+    }
+    public void TriggerExplosion()
+    {
+        transform.localScale = Vector3.one * _explosionRadius;
+        StartCoroutine(ExplodeCoroutine());
+    }
+
+    private IEnumerator ExplodeCoroutine()
+    {
         yield return new WaitForSeconds(lifeTime);
         Explode();
     }
@@ -30,6 +39,6 @@ public class Bomb : MonoBehaviour
                 damageable.TakeDamage(100);
             }
         }
-        Destroy(gameObject);
+
     }
 }
