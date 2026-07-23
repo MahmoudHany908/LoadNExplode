@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class VisionSensor
 {
@@ -28,9 +28,10 @@ public class VisionSensor
         float angle = Vector3.Angle(_eye.forward, dir);
         if (angle > _fovAngle * 0.5f) return false;
 
-        int combinedMask = _obstacleMask | _targetMask;
-        if (Physics.Raycast(_eye.position, dir.normalized, out var hit, dist, combinedMask))
+        if (Physics.Raycast(_eye.position, dir.normalized, out var hit, dist, _obstacleMask))
+        {
             return hit.transform == target || hit.transform.IsChildOf(target);
+        }
 
         return true;
     }
