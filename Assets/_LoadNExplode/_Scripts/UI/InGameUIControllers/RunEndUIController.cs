@@ -2,11 +2,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DeathUIController : MonoBehaviour
+public class RunEndUIController : MonoBehaviour
 {
     [SerializeField] private Button btn_MainMenu;
     [SerializeField] private Button restart_MainMenu;
-    //add more buttons here if needed
 
 
     private void OnEnable()

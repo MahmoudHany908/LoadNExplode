@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 2854813490303168828}
   - component: {fileID: 6269594071308057899}
   m_Layer: 5
-  m_Name: DeathPanelCanvasPrefab
+  m_Name: RunEndCanvasPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

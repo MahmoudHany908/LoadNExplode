@@ -6,21 +6,33 @@ public class GamePlayManager : MonoBehaviour
 {
     [FormerlySerializedAs("deathUIPrefab")]
     [SerializeField] private GameObject spawnMapUI;
+    [SerializeField] private GameObject runEndUI;
 
-    private Player deadPlayer;
+    private Player _palyer;
 
     private void OnEnable()
     {
         EventBus.Subscribe<PlayerDeathEvent>(OnPlayerDeath);
-        EventBus.Subscribe<OnRestartGameButtonPressedEvent>(OnRestartGameButtonPressed);
         EventBus.Subscribe<RequestSpawnEvent>(OnSpawnRequested);
+
+        EventBus.Subscribe<OnCountdownFinishedEvent>(OnCountdownFinished);
+        EventBus.Subscribe<OnRestartGameButtonPressedEvent>(OnRestartGameButtonPressed);
     }
     private void OnDisable()
     {
         EventBus.Unsubscribe<PlayerDeathEvent>(OnPlayerDeath);
-        EventBus.Unsubscribe<OnRestartGameButtonPressedEvent>(OnRestartGameButtonPressed);
         EventBus.Unsubscribe<RequestSpawnEvent>(OnSpawnRequested);
 
+
+        EventBus.Unsubscribe<OnRestartGameButtonPressedEvent>(OnRestartGameButtonPressed);
+
+    }
+
+
+    private void OnCountdownFinished(OnCountdownFinishedEvent evt)
+    {
+        Time.timeScale = 0;
+        Instantiate(runEndUI);
     }
 
     private void OnRestartGameButtonPressed(OnRestartGameButtonPressedEvent evt)
@@ -33,8 +45,10 @@ public class GamePlayManager : MonoBehaviour
 
     private void OnPlayerDeath(PlayerDeathEvent evt)
     {
-        deadPlayer = evt.Player;
-        Time.timeScale = 0f;
+
+
+        _palyer = evt.Player;
+        _palyer.GetPlayerMovement().enabled = false;
 
         if (spawnMapUI != null)
             spawnMapUI.SetActive(true);
@@ -42,16 +56,19 @@ public class GamePlayManager : MonoBehaviour
 
     private void OnSpawnRequested(RequestSpawnEvent evt)
     {
-        if (deadPlayer == null || evt.SpawnPoint == null)
+        if (_palyer == null || evt.SpawnPoint == null)
             return;
 
-        deadPlayer.Respawn(evt.SpawnPoint.position);
-
-        if (spawnMapUI != null)
-            spawnMapUI.SetActive(false);
-
         Time.timeScale = 1f;
-        EventBus.Publish(new PlayerSpawnedEvent(deadPlayer, evt.SpawnPoint));
-        deadPlayer = null;
+
+        if (spawnMapUI != null) spawnMapUI.SetActive(false);
+
+        _palyer.GetPlayerMovement().enabled = true;
+        _palyer.Respawn(evt.SpawnPoint.position);
+
+
+        EventBus.Publish(new PlayerSpawnedEvent(_palyer, evt.SpawnPoint));
+
+        _palyer = null;
     }
 }
