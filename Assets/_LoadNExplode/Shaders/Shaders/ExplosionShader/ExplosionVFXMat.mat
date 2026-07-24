@@ -20,12 +20,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ExplosionShaderMat
+  m_Name: ExplosionVFXMat
   m_Shader: {fileID: -6465566751694194690, guid: 927e612a476a333438a1b4a2e52d5cfe, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ALPHATEST_ON
+  - _ENABLE_FOR_VFX
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -67,7 +68,7 @@ Material:
     - _DesolveSlider2: 0
     - _DstBlend: 0
     - _DstBlendAlpha: 0
-    - _ENABLE_FOR_VFX: 0
+    - _ENABLE_FOR_VFX: 1
     - _FireDissolve: 0.656
     - _QueueControl: 0
     - _QueueOffset: 0
