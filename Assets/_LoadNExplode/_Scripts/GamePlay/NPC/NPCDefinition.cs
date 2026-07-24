@@ -36,4 +36,7 @@ public class NPCDefinition : ScriptableObject
 
     [Header("Search")]
     public float SearchDuration = 4f;
+    [Header("Charmed")]
+    public float CharmedMovementSpeed = 2.5f;
+
 }

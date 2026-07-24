@@ -1,9 +1,15 @@
 ﻿using System;
 using UnityEngine;
 
-public class Person : UnitBase
+public class NPC : UnitBase
 {
     private int Health = 100;
+    private NPCController NPCController;
+
+    private void Awake()
+    {
+        NPCController = GetComponent<NPCController>();
+    }
 
     public override void TakeDamage(int damage)
     {
