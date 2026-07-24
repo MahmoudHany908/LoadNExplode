@@ -34,10 +34,26 @@ public class GamePlayManager : MonoBehaviour
     private void OnCountdownFinished(OnCountdownFinishedEvent evt)
     {
         Time.timeScale = 0;
-        Instantiate(runEndUI);
-        int currentKills = GameScoreManager.Instance.CurrentKills;
-        string savedName = PlayerPrefs.GetString("SavedPlayerName", "Unknown");
-        GameScoreManager.Instance.EndRun(savedName);
+        
+        if (runEndUI != null)
+        {
+            Instantiate(runEndUI);
+        }
+        else
+        {
+            Debug.LogWarning("runEndUI is not assigned on GamePlayManager.", this);
+        }
+
+        if (GameScoreManager.Instance != null)
+        {
+            int currentKills = GameScoreManager.Instance.CurrentKills;
+            string savedName = PlayerPrefs.GetString("SavedPlayerName", "Unknown");
+            GameScoreManager.Instance.EndRun(savedName);
+        }
+        else
+        {
+            Debug.LogError("GameScoreManager.Instance is null! This usually happens if you play the GamePlay scene directly in the Editor without passing through the MainMenu scene where it is created.", this);
+        }
     }
 
     private void OnRestartGameButtonPressed(OnRestartGameButtonPressedEvent evt)
