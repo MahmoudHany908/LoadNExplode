@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -7,6 +8,8 @@ public class GamePlayManager : MonoBehaviour
     [FormerlySerializedAs("deathUIPrefab")]
     [SerializeField] private GameObject spawnMapUI;
     [SerializeField] private GameObject shopUI;
+    [SerializeField] private GameObject DeathPanelUI;
+
     [SerializeField] private GameObject runEndUI;
 
     private Player _palyer;
@@ -34,6 +37,9 @@ public class GamePlayManager : MonoBehaviour
     {
         Time.timeScale = 0;
         Instantiate(runEndUI);
+        int currentKills = GameScoreManager.Instance.CurrentKills;
+        string savedName = PlayerPrefs.GetString("SavedPlayerName", "Unknown");
+        GameScoreManager.Instance.EndRun(savedName);
     }
 
     private void OnRestartGameButtonPressed(OnRestartGameButtonPressedEvent evt)
@@ -46,10 +52,8 @@ public class GamePlayManager : MonoBehaviour
 
     private void OnPlayerDeath(PlayerDeathEvent evt)
     {
-
-
         _palyer = evt.Player;
-        _palyer.GetPlayerMovement().enabled = false;
+        StartCoroutine(ToggleDeathPanel(true, 1.5f));
 
         if (spawnMapUI != null)
             spawnMapUI.SetActive(true);
@@ -59,8 +63,7 @@ public class GamePlayManager : MonoBehaviour
 
     private void OnSpawnRequested(RequestSpawnEvent evt)
     {
-        if (_palyer == null || evt.SpawnPoint == null)
-            return;
+        if (_palyer == null || evt.SpawnPoint == null) return;
 
         Time.timeScale = 1f;
 
@@ -69,10 +72,16 @@ public class GamePlayManager : MonoBehaviour
 
         _palyer.GetPlayerMovement().enabled = true;
         _palyer.Respawn(evt.SpawnPoint.position);
-
+        StartCoroutine(ToggleDeathPanel(false, 0.1f));
 
         EventBus.Publish(new PlayerSpawnedEvent(_palyer, evt.SpawnPoint));
-
         _palyer = null;
+    }
+
+    private IEnumerator ToggleDeathPanel(bool isActive, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Time.timeScale = 1f;
+        if (DeathPanelUI != null) DeathPanelUI.SetActive(isActive);
     }
 }
