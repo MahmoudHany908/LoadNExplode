@@ -77,7 +77,7 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 0
     m_Colors:
-    - _DarkColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
+    - _DarkColor: {r: 0.19999999, g: 0.19999999, b: 0.19999999, a: 1}
     - _FireColor: {r: 10.43295, g: 3.5504801, b: 0.27311385, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
