@@ -1,21 +1,40 @@
-using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class GamePlayManager : MonoBehaviour
 {
-    [SerializeField] private GameObject deathUIPrefab;
+    [FormerlySerializedAs("deathUIPrefab")]
+    [SerializeField] private GameObject DeathPanelUI;
+
+    [SerializeField] private GameObject runEndUI;
+
+    private Player _palyer;
 
     private void OnEnable()
     {
         EventBus.Subscribe<PlayerDeathEvent>(OnPlayerDeath);
+        EventBus.Subscribe<RequestSpawnEvent>(OnSpawnRequested);
+
+        EventBus.Subscribe<OnCountdownFinishedEvent>(OnCountdownFinished);
         EventBus.Subscribe<OnRestartGameButtonPressedEvent>(OnRestartGameButtonPressed);
     }
     private void OnDisable()
     {
         EventBus.Unsubscribe<PlayerDeathEvent>(OnPlayerDeath);
+        EventBus.Unsubscribe<RequestSpawnEvent>(OnSpawnRequested);
+
+
         EventBus.Unsubscribe<OnRestartGameButtonPressedEvent>(OnRestartGameButtonPressed);
 
+    }
+
+
+    private void OnCountdownFinished(OnCountdownFinishedEvent evt)
+    {
+        Time.timeScale = 0;
+        Instantiate(runEndUI);
     }
 
     private void OnRestartGameButtonPressed(OnRestartGameButtonPressedEvent evt)
@@ -28,9 +47,26 @@ public class GamePlayManager : MonoBehaviour
 
     private void OnPlayerDeath(PlayerDeathEvent evt)
     {
-        //do some shit first before showing the death UI
+        _palyer = evt.Player;
+        StartCoroutine(ToggleDeathPanel(true, 1.5f));
 
-        Time.timeScale = 0f;
-        Instantiate(deathUIPrefab);
+    }
+
+    private void OnSpawnRequested(RequestSpawnEvent evt)
+    {
+        if (_palyer == null || evt.SpawnPoint == null) return;
+
+        _palyer.Respawn(evt.SpawnPoint.position);
+        StartCoroutine(ToggleDeathPanel(false, 0.1f));
+
+        EventBus.Publish(new PlayerSpawnedEvent(_palyer, evt.SpawnPoint));
+        _palyer = null;
+    }
+
+    private IEnumerator ToggleDeathPanel(bool isActive, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Time.timeScale = 1f;
+        if (DeathPanelUI != null) DeathPanelUI.SetActive(isActive);
     }
 }

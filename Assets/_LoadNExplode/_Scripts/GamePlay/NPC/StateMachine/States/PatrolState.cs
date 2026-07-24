@@ -1,6 +1,11 @@
-﻿public class PatrolState : INPCState
+public class PatrolState : INPCState
 {
-    public void Enter(NPCContext ctx) => ctx.Agent.SetDestination(ctx.NextPatrolPoint());
+    public void Enter(NPCContext ctx)
+    {
+        ctx.Agent.speed = ctx.Definition.PatrolSpeed;
+        ctx.Agent.isStopped = false;
+        ctx.Agent.SetDestination(ctx.NextPatrolPoint());
+    }
 
     public void Tick(NPCContext ctx)
     {
