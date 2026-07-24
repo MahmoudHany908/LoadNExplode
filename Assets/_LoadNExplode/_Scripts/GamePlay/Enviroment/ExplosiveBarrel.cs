@@ -14,7 +14,6 @@ public class ExplosiveBarrel : MonoBehaviour, IDamageable
     [SerializeField] private GameObject _explosionRadiusVisual;
     [SerializeField] private AudioClip _explosionSound;
 
-
     public Vector3 Position => transform.position;
 
     private bool _isExplode = false;
@@ -39,7 +38,10 @@ public class ExplosiveBarrel : MonoBehaviour, IDamageable
         if (_explosionRadiusVisual != null)
         {
             _explosionRadiusVisual.SetActive(true);
-            _explosionRadiusVisual.transform.localScale = Vector3.one * _explosionRadius;
+
+            Vector3 currentScale = _explosionRadiusVisual.transform.localScale;
+
+            _explosionRadiusVisual.transform.localScale = new Vector3(_explosionRadius, currentScale.y, _explosionRadius);
         }
 
         yield return new WaitForSecondsRealtime(_timeToExplode);
@@ -49,7 +51,6 @@ public class ExplosiveBarrel : MonoBehaviour, IDamageable
 
     private void Explode()
     {
-
         if (_explosionSound != null)
         {
             AudioSource.PlayClipAtPoint(_explosionSound, transform.position);
@@ -66,7 +67,6 @@ public class ExplosiveBarrel : MonoBehaviour, IDamageable
         {
             if (collider.TryGetComponent(out IDamageable damageable))
             {
-
                 damageable.TakeDamage(_explosionDamage);
             }
         }

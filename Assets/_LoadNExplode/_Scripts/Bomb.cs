@@ -29,8 +29,9 @@ public class Bomb : MonoBehaviour
 
     public void TriggerExplosion(float timeToExplode)
     {
-        bombVisual.transform.localScale = Vector3.one * _explosionRadius;
-
+        bombVisual.SetActive(false);
+        Vector3 currentScale = bombVisual.transform.localScale;
+        bombVisual.transform.localScale = new Vector3(_explosionRadius, currentScale.y, _explosionRadius);
         StartCoroutine(CountdownAndExplodeCoroutine(timeToExplode));
     }
 
@@ -45,7 +46,7 @@ public class Bomb : MonoBehaviour
                 _countdownText.text = remainingTime.ToString("F2");
             }
 
-            yield return null; // Wait for next frame
+            yield return null;
             remainingTime -= Time.deltaTime;
         }
 
@@ -80,7 +81,7 @@ public class Bomb : MonoBehaviour
                 damageable.TakeDamage(_explosionDamage);
             }
         }
-
+        if (!_destroyOnExplode) bombVisual.SetActive(false);
 
         if (_destroyOnExplode)
         {
