@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -7,6 +8,7 @@ public class InventoryHUD : MonoBehaviour
 {
     [SerializeField] private PlayerInventory inventory;
     [SerializeField] private List<Image> slotIcons = new();
+    [SerializeField] private List<TextMeshProUGUI> slotNames = new();
     [SerializeField] private List<Button> useButtons = new();
 
     private readonly List<UnityAction> _buttonListeners = new();
@@ -62,16 +64,28 @@ public class InventoryHUD : MonoBehaviour
         if (inventory == null)
             return;
 
-        for (int i = 0; i < slotIcons.Count; i++)
+        int slotCount = Mathf.Max(slotIcons.Count, slotNames.Count);
+
+        for (int i = 0; i < slotCount; i++)
         {
             ShopItemDefinition item = inventory.GetItem(i);
-            Image icon = slotIcons[i];
+            bool hasItem = item != null;
 
-            if (icon == null)
-                continue;
+            if (i < slotIcons.Count && slotIcons[i] != null)
+            {
+                Image icon = slotIcons[i];
+                icon.sprite = hasItem ? item.Icon : null;
+                icon.enabled = hasItem && item.Icon != null;
+                icon.color = Color.white;
+                icon.preserveAspect = true;
+            }
 
-            icon.sprite = item != null ? item.Icon : null;
-            icon.enabled = item != null && item.Icon != null;
+            if (i < slotNames.Count && slotNames[i] != null)
+            {
+                TextMeshProUGUI nameLabel = slotNames[i];
+                nameLabel.text = hasItem ? item.ItemName : string.Empty;
+                nameLabel.enabled = hasItem;
+            }
         }
     }
 
