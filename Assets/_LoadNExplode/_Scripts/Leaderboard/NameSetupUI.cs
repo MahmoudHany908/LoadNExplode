@@ -1,23 +1,32 @@
 using UnityEngine;
 using TMPro;
+using LootLocker.Requests; 
 
 public class NameSetupUI : MonoBehaviour
 {
-    [Header("UI Elements")]
     public TMP_InputField nameInputField;
 
     public void SaveNameAndContinue()
     {
-        string playerName = nameInputField.text;
+        string playerName = nameInputField.text.Trim();
 
-        if (string.IsNullOrWhiteSpace(playerName))
+        if (!string.IsNullOrEmpty(playerName))
         {
-            playerName = "Player_" + Random.Range(1000, 9999);
+            PlayerPrefs.SetString("SavedPlayerName", playerName);
+            PlayerPrefs.Save();
+
+            LootLockerSDKManager.SetPlayerName(playerName, (response) =>
+            {
+                if (response.success) 
+                { 
+                    Debug.Log("Player name updated on server."); 
+                    EventBus.Publish(new RequestSceneLoadEvent("MainMenuScene"));
+                }
+                else
+                {
+                    Debug.LogError("Failed to set name: " + response.errorData.message);
+                }
+            });
         }
-
-        PlayerPrefs.SetString("SavedPlayerName", playerName);
-        PlayerPrefs.Save();
-
-        EventBus.Publish(new RequestSceneLoadEvent("MainMenuScene"));
     }
 }

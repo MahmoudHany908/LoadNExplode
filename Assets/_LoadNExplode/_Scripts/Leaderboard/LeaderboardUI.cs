@@ -12,24 +12,36 @@ public class LeaderboardUI : MonoBehaviour
 
     private ILeaderboardService _leaderboardService;
 
-    private void Start()
+    private void Awake()
     {
-        _leaderboardService = new MockLeaderboard();
-        //_leaderboardService = new LiveLeaderboard();
+        _leaderboardService = new LiveLeaderboard();
     }
 
-    public async void LoadTop100()
+    private void OnEnable()
     {
+        RefreshLeaderboard();
+    }
+
+    public async void RefreshLeaderboard()
+    {
+        // Clear any currently instantiated UI rows
         foreach (Transform child in scrollContentArea)
         {
             Destroy(child.gameObject);
         }
 
+        // Re-fetch the updated scores
         List<LeaderboardEntry> topScores = await _leaderboardService.GetTopScoresAsync(100);
         foreach (var entry in topScores)
         {
             GameObject newUIEntry = Instantiate(scoreEntryPrefab, scrollContentArea);
             newUIEntry.GetComponent<ScoreEntryUI>().Setup(entry.Rank, entry.PlayerName, entry.Score);
         }
+    }
+
+    // Fallback in case your 'Load Top 100' button is still pointing to this method name in the Inspector
+    public void LoadTop100()
+    {
+        RefreshLeaderboard();
     }
 }

@@ -10,6 +10,8 @@ public class LootLockerInitializer : MonoBehaviour
             if (response.success)
             {
                 Debug.Log("LootLocker Guest Session Started Successfully");
+                PlayerPrefs.SetString("LL_PlayerID", response.player_id.ToString());
+                PlayerPrefs.Save();
             }
             else
             {
