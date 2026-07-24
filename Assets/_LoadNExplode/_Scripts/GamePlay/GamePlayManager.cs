@@ -6,10 +6,7 @@ using UnityEngine.Serialization;
 public class GamePlayManager : MonoBehaviour
 {
     [FormerlySerializedAs("deathUIPrefab")]
-    [SerializeField] private GameObject spawnMapUI;
-    [SerializeField] private GameObject shopUI;
     [SerializeField] private GameObject DeathPanelUI;
-
     [SerializeField] private GameObject runEndUI;
 
     private Player _palyer;
@@ -36,7 +33,7 @@ public class GamePlayManager : MonoBehaviour
     private void OnCountdownFinished(OnCountdownFinishedEvent evt)
     {
         Time.timeScale = 0;
-        
+
         if (runEndUI != null)
         {
             Instantiate(runEndUI);
@@ -70,11 +67,6 @@ public class GamePlayManager : MonoBehaviour
     {
         _palyer = evt.Player;
         StartCoroutine(ToggleDeathPanel(true, 1.5f));
-
-        if (spawnMapUI != null)
-            spawnMapUI.SetActive(true);
-        if (shopUI != null)
-            shopUI.SetActive(true);
     }
 
     private void OnSpawnRequested(RequestSpawnEvent evt)
@@ -83,8 +75,6 @@ public class GamePlayManager : MonoBehaviour
 
         Time.timeScale = 1f;
 
-        if (spawnMapUI != null) spawnMapUI.SetActive(false);
-        if (shopUI != null) shopUI.SetActive(false);
 
         _palyer.GetPlayerMovement().enabled = true;
         _palyer.Respawn(evt.SpawnPoint.position);
