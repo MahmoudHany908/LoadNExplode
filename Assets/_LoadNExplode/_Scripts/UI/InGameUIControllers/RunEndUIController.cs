@@ -26,6 +26,7 @@ public class RunEndUIController : MonoBehaviour
         //SceneLoader.LoadScene("MainMenuScene"); 
 
         EventBus.Publish(new RequestSceneLoadEvent("MainMenuScene"));
+        Time.timeScale = 1f;
     }
 
     private void OnRestartButtonClicked()

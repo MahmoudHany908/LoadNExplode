@@ -5,7 +5,8 @@ using UnityEngine.Serialization;
 public class GamePlayManager : MonoBehaviour
 {
     [FormerlySerializedAs("deathUIPrefab")]
-    [SerializeField] private GameObject spawnMapUI;
+    [SerializeField] private GameObject mapUI;
+    [SerializeField] private GameObject shopUI;
     [SerializeField] private GameObject runEndUI;
 
     private Player _palyer;
@@ -45,25 +46,29 @@ public class GamePlayManager : MonoBehaviour
 
     private void OnPlayerDeath(PlayerDeathEvent evt)
     {
-
+        //do explosion effect here
+        //then wait for a few seconds and then show the spawn map UI
 
         _palyer = evt.Player;
         _palyer.GetPlayerMovement().enabled = false;
+        _palyer.GetPlayerVisuals().enabled = false;
 
-        if (spawnMapUI != null)
-            spawnMapUI.SetActive(true);
+        if (mapUI != null) mapUI.SetActive(true);
+        if (shopUI != null) shopUI.SetActive(true);
     }
 
     private void OnSpawnRequested(RequestSpawnEvent evt)
     {
-        if (_palyer == null || evt.SpawnPoint == null)
-            return;
+        if (_palyer == null || evt.SpawnPoint == null) return;
 
         Time.timeScale = 1f;
 
-        if (spawnMapUI != null) spawnMapUI.SetActive(false);
+        if (mapUI != null) mapUI.SetActive(false);
+        if (shopUI != null) shopUI.SetActive(false);
 
         _palyer.GetPlayerMovement().enabled = true;
+        _palyer.GetPlayerVisuals().enabled = true;
+
         _palyer.Respawn(evt.SpawnPoint.position);
 
 

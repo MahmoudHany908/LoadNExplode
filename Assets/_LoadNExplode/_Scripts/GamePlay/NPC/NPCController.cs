@@ -13,6 +13,7 @@ public class NPCController : MonoBehaviour
     private VisionSensor _vision;
     private float _visionTimer;
 
+
     private void Awake()
     {
         var agent = GetComponent<NavMeshAgent>();
@@ -45,6 +46,11 @@ public class NPCController : MonoBehaviour
     private void Start()
     {
         _stateMachine.ChangeState(_context.States.Patrol, _context);
+    }
+    public void SetCharm(float duration = 5f, Transform target = null)
+    {
+        _context.States.Charmed.SetDuration(duration, target);
+        _stateMachine.ChangeState(_context.States.Charmed, _context);
     }
 
     private void Update()
