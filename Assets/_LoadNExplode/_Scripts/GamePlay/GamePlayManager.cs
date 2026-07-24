@@ -35,6 +35,9 @@ public class GamePlayManager : MonoBehaviour
     {
         Time.timeScale = 0;
         Instantiate(runEndUI);
+        int currentKills = GameScoreManager.Instance.CurrentKills;
+        string savedName = PlayerPrefs.GetString("SavedPlayerName", "Unknown");
+        GameScoreManager.Instance.EndRun(savedName);
     }
 
     private void OnRestartGameButtonPressed(OnRestartGameButtonPressedEvent evt)

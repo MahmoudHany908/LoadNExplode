@@ -22,7 +22,7 @@ public class MockLeaderboard : ILeaderboardService
                 Rank = i,
                 // Just generating some fake names for testing
                 PlayerName = i == 1 ? "OZOZ" : $"Player_{Random.Range(1000, 9999)}",
-                Score = 1000 - (i * 5)
+                Score = Random.Range(1, 100)
             });
         }
 
