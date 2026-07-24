@@ -4,8 +4,7 @@ using TMPro;
 
 public class LeaderboardUI : MonoBehaviour
 {
-    [Header("Personal Best")]
-    public TextMeshProUGUI personalBestText;
+
 
     [Header("Top 100 List")]
     public GameObject scoreEntryPrefab;
@@ -15,9 +14,8 @@ public class LeaderboardUI : MonoBehaviour
 
     private void Start()
     {
-        //_leaderboardService = new MockLeaderboard();
-        _leaderboardService = new LiveLeaderboard();
-        personalBestText.text = $"Highest Score: {PlayerPrefs.GetInt("PersonalBest", 0)}";
+        _leaderboardService = new MockLeaderboard();
+        //_leaderboardService = new LiveLeaderboard();
     }
 
     public async void LoadTop100()

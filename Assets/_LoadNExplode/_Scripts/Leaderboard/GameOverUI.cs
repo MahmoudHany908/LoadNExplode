@@ -1,25 +1,19 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 
 public class GameOverUI : MonoBehaviour
 {
     [Header("UI Elements")]
-    public TMP_InputField nameInputField;
-    public Button submitButton;
+    public TextMeshProUGUI currentScoreText;
+    public TextMeshProUGUI bestScoreText;
 
-    public void OnSubmitScoreButtonClicked()
+    private void OnEnable()
     {
-        submitButton.interactable = false;
+        int currentKills = GameScoreManager.Instance.CurrentKills;
+        currentScoreText.text = $"Score: {currentKills}";
+        string savedName = PlayerPrefs.GetString("SavedPlayerName", "Unknown");
+        GameScoreManager.Instance.EndRun(savedName);
 
-        string chosenName = nameInputField.text;
-
-        if (string.IsNullOrWhiteSpace(chosenName))
-        {
-            chosenName = "Anonymous";
-        }
-
-        Debug.Log($"Submitting score for: {chosenName}");
-        GameScoreManager.Instance.EndRun(chosenName);
+        bestScoreText.text = $"Personal Best: {PlayerPrefs.GetInt("PersonalBest", 0)}";
     }
 }

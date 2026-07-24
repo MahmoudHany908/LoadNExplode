@@ -22,7 +22,6 @@ public class LiveLeaderboard : ILeaderboardService
             }
             else
             {
-                // Updated error syntax here
                 Debug.LogError("Failed to upload score: " + response.errorData.message);
                 tcs.SetResult(false);
             }
@@ -55,7 +54,6 @@ public class LiveLeaderboard : ILeaderboardService
             }
             else
             {
-                // Updated error syntax here
                 Debug.LogError("Failed to fetch scores: " + response.errorData.message);
                 tcs.SetResult(formattedScores);
             }

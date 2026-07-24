@@ -16,9 +16,26 @@ public class GameScoreManager : MonoBehaviour
 
         LocalHighScore = PlayerPrefs.GetInt("PersonalBest", 0);
 
+       
+        _leaderboardService = new MockLeaderboard();
+        //_leaderboardService = new LiveLeaderboard();
+    }
 
-        //_leaderboardService = new MockLeaderboard();
-        _leaderboardService = new LiveLeaderboard(); ;
+    private void OnEnable()
+    {
+        EventBus.Subscribe<EnemyDeathEvent>(HandleEnemyKilled);
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Unsubscribe<EnemyDeathEvent>(HandleEnemyKilled);
+    }
+
+
+    private void HandleEnemyKilled(EnemyDeathEvent deathEvent)
+    {
+        AddKill();
+        Debug.Log($"Enemy Killed at {deathEvent.DeathPosition}. Total Kills: {CurrentKills}");
     }
 
     public void AddKill()
@@ -36,6 +53,6 @@ public class GameScoreManager : MonoBehaviour
             await _leaderboardService.SubmitScoreAsync(playerName, LocalHighScore);
         }
 
-        CurrentKills = 0; 
+        CurrentKills = 0;
     }
 }
