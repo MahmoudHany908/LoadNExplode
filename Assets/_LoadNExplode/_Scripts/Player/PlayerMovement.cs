@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, ILaunchable
 {
     [Header("MovementVariables")]
     [SerializeField] private float MoveSpeed;
@@ -24,6 +24,28 @@ public class PlayerMovement : MonoBehaviour
     private Collider col;
     private Rigidbody rb;
     private float speedMultiplier = 1f;
+
+
+    [Header("Launch")]
+    [SerializeField] private float launchControlLockTime = 0.3f;
+    private float _launchLockTimer;
+
+    public void Launch(Vector3 velocity, LaunchApplyMode mode, LaunchPad source)
+    {
+        switch (mode)
+        {
+            case LaunchApplyMode.SetVelocityDirect:
+                rb.linearVelocity = velocity;
+                break;
+            case LaunchApplyMode.VelocityChange:
+                rb.AddForce(velocity, ForceMode.VelocityChange);
+                break;
+            case LaunchApplyMode.Impulse:
+                rb.AddForce(velocity, ForceMode.Impulse);
+                break;
+        }
+        _launchLockTimer = launchControlLockTime;
+    }
 
     void Start()
     {
@@ -53,8 +75,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
+
     private void ApplyMovement(float speed)
     {
+        if (_launchLockTimer > 0f)
+        {
+            _launchLockTimer -= Time.fixedDeltaTime;
+            return;
+        }
+
         if (IsGrounded())
         {
 
