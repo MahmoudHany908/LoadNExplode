@@ -33,6 +33,7 @@ public class DeadlyLove : MonoBehaviour, IAbility
             {
                 Debug.Log($"DeadlyLove Ability activated on NPC: {npc.name}");
                 npc.SetCharm(abilityDuration, player.transform);
+                //npc.Stun(abilityDuration);
             }
         }
     }

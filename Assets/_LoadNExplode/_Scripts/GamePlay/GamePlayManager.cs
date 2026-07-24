@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -5,8 +6,8 @@ using UnityEngine.Serialization;
 public class GamePlayManager : MonoBehaviour
 {
     [FormerlySerializedAs("deathUIPrefab")]
-    [SerializeField] private GameObject mapUI;
-    [SerializeField] private GameObject shopUI;
+    [SerializeField] private GameObject DeathPanelUI;
+
     [SerializeField] private GameObject runEndUI;
 
     private Player _palyer;
@@ -46,34 +47,26 @@ public class GamePlayManager : MonoBehaviour
 
     private void OnPlayerDeath(PlayerDeathEvent evt)
     {
-        //do explosion effect here
-        //then wait for a few seconds and then show the spawn map UI
-
         _palyer = evt.Player;
-        _palyer.GetPlayerMovement().enabled = false;
-        _palyer.GetPlayerVisuals().enabled = false;
+        StartCoroutine(ToggleDeathPanel(true, 1.5f));
 
-        if (mapUI != null) mapUI.SetActive(true);
-        if (shopUI != null) shopUI.SetActive(true);
     }
 
     private void OnSpawnRequested(RequestSpawnEvent evt)
     {
         if (_palyer == null || evt.SpawnPoint == null) return;
 
-        Time.timeScale = 1f;
-
-        if (mapUI != null) mapUI.SetActive(false);
-        if (shopUI != null) shopUI.SetActive(false);
-
-        _palyer.GetPlayerMovement().enabled = true;
-        _palyer.GetPlayerVisuals().enabled = true;
-
         _palyer.Respawn(evt.SpawnPoint.position);
-
+        StartCoroutine(ToggleDeathPanel(false, 0.1f));
 
         EventBus.Publish(new PlayerSpawnedEvent(_palyer, evt.SpawnPoint));
-
         _palyer = null;
+    }
+
+    private IEnumerator ToggleDeathPanel(bool isActive, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Time.timeScale = 1f;
+        if (DeathPanelUI != null) DeathPanelUI.SetActive(isActive);
     }
 }

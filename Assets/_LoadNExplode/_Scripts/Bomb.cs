@@ -1,44 +1,107 @@
-
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Bomb : MonoBehaviour
 {
+    [Header("Explosion Settings")]
     [SerializeField] private float _explosionRadius = 5f;
-    [SerializeField] private float lifeTime = 4f;
+    [SerializeField] private int _explosionDamage = 100;
+    [SerializeField] private bool _destroyOnExplode = false;
 
-    private List<Collider> _collidersInRange = new List<Collider>();
+    [Header("Visuals & Effects")]
+    [SerializeField] private GameObject _explodeEffectsPrefab;
+    [SerializeField] private GameObject bombVisual;
+    [SerializeField] private TextMeshPro _countdownText;
+
+    [Header("Audio (Optional)")]
+    [SerializeField] private AudioClip _explosionSound;
+    [SerializeField] private AudioClip _tickingSound;
+
+    private Transform _parent;
 
     private void Start()
     {
-
-        TriggerExplosion();
-    }
-    public void TriggerExplosion()
-    {
-        transform.localScale = Vector3.one * _explosionRadius;
-        StartCoroutine(ExplodeCoroutine());
+        _parent = transform.parent;
+        PositionCountdownText();
     }
 
-    private IEnumerator ExplodeCoroutine()
+
+    public void TriggerExplosion(float timeToExplode)
     {
-        yield return new WaitForSeconds(lifeTime);
+        bombVisual.transform.localScale = Vector3.one * _explosionRadius;
+
+        StartCoroutine(CountdownAndExplodeCoroutine(timeToExplode));
+    }
+
+    private IEnumerator CountdownAndExplodeCoroutine(float totalTime)
+    {
+        float remainingTime = totalTime;
+
+        while (remainingTime > 0f)
+        {
+            if (_countdownText != null)
+            {
+                _countdownText.text = remainingTime.ToString("F2");
+            }
+
+            yield return null; // Wait for next frame
+            remainingTime -= Time.deltaTime;
+        }
+
+
+        if (_countdownText != null)
+        {
+            _countdownText.text = "0.00";
+        }
+
         Explode();
     }
 
     private void Explode()
     {
-        _collidersInRange.Clear();
+        if (_explosionSound != null)
+        {
+            AudioSource.PlayClipAtPoint(_explosionSound, transform.position);
+        }
+
+
+        if (_explodeEffectsPrefab != null)
+        {
+            Instantiate(_explodeEffectsPrefab, transform.position, Quaternion.identity);
+        }
+
+
         Collider[] colliders = Physics.OverlapSphere(transform.position, _explosionRadius);
-        foreach (var collider in colliders)
+        foreach (Collider collider in colliders)
         {
             if (collider.TryGetComponent(out IDamageable damageable))
             {
-                _collidersInRange.Add(collider);
-                damageable.TakeDamage(100);
+                damageable.TakeDamage(_explosionDamage);
             }
         }
 
+
+        if (_destroyOnExplode)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    private void PositionCountdownText()
+    {
+        if (_countdownText == null || _parent == null) return;
+
+
+        Collider parentCollider = _parent.GetComponent<Collider>();
+
+        if (parentCollider != null)
+        {
+            _countdownText.transform.position = parentCollider.bounds.max;
+        }
+        else
+        {
+            _countdownText.transform.localPosition = new Vector3(0.5f, 0.5f, 0f);
+        }
     }
 }

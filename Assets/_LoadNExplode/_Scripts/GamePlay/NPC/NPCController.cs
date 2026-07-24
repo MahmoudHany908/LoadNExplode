@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
@@ -51,6 +51,12 @@ public class NPCController : MonoBehaviour
     {
         _context.States.Charmed.SetDuration(duration, target);
         _stateMachine.ChangeState(_context.States.Charmed, _context);
+    }
+
+    public void Stun(float time = 2f)
+    {
+        _context.States.Stunned.SetDuration(time);
+        _stateMachine.ChangeState(_context.States.Stunned, _context);
     }
 
     private void Update()

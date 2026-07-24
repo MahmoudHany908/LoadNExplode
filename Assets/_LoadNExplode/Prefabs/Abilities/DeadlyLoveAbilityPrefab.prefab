@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DeadlyLove
   abilityRange: 10
-  abilityDuration: 2.5
+  abilityDuration: 5
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 64
