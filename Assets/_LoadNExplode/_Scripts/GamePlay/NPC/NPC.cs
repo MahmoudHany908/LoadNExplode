@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class NPC : UnitBase
 {
+    [SerializeField] private int goldReward = 1;
+
     private int Health = 100;
     private NPCController NPCController;
 
@@ -30,7 +32,8 @@ public class NPC : UnitBase
 
     public override void Die()
     {
-        EventBus.Publish(new EnemyDeathEvent());
+        EventBus.Publish(new EnemyDeathEvent(gameObject, transform.position, goldReward));
+        //EventBus.Publish(new EnemyDeathEvent());
 
         int xp = UnityEngine.Random.Range(20, 30);
         PlayerStats.Instance.GainXP(xp);

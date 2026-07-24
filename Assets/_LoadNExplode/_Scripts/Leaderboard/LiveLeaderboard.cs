@@ -9,8 +9,6 @@ public class LiveLeaderboard : ILeaderboardService
 
     public async Task SubmitScoreAsync(string playerName, int score)
     {
-        await SetPlayerNameAsync(playerName);
-
         TaskCompletionSource<bool> tcs = new();
 
         LootLockerSDKManager.SubmitScore("", score, leaderboardID, (response) =>
@@ -18,13 +16,8 @@ public class LiveLeaderboard : ILeaderboardService
             if (response.success)
             {
                 Debug.Log("Successfully uploaded score!");
-                tcs.SetResult(true);
             }
-            else
-            {
-                Debug.LogError("Failed to upload score: " + response.errorData.message);
-                tcs.SetResult(false);
-            }
+            tcs.SetResult(response.success);
         });
 
         await tcs.Task;
@@ -40,15 +33,23 @@ public class LiveLeaderboard : ILeaderboardService
 
             if (response.success)
             {
-                LootLockerLeaderboardMember[] members = response.items;
-                foreach (var member in members)
+                if (response.items != null)
                 {
-                    formattedScores.Add(new()
+                    foreach (var member in response.items)
                     {
-                        Rank = member.rank,
-                        PlayerName = string.IsNullOrEmpty(member.player.name) ? "Unknown" : member.player.name,
-                        Score = member.score
-                    });
+                        string pName = "Unknown";
+                        if (member.player != null && !string.IsNullOrEmpty(member.player.name))
+                        {
+                            pName = member.player.name;
+                        }
+
+                        formattedScores.Add(new LeaderboardEntry
+                        {
+                            Rank = member.rank,
+                            PlayerName = pName,
+                            Score = member.score
+                        });
+                    }
                 }
                 tcs.SetResult(formattedScores);
             }

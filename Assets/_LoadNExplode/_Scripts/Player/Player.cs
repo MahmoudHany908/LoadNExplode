@@ -14,7 +14,9 @@ public class Player : UnitBase
     private Bomb bomb;
 
     private float timeTakesToExplode = 10;
+    private int _invulnerabilityCount;
     public int Health { get; private set; }
+    public bool IsInvulnerable => _invulnerabilityCount > 0;
 
     private void Awake()
     {
@@ -29,10 +31,20 @@ public class Player : UnitBase
         Health = maxHealth;
     }
 
+    public void AddInvulnerability()
+    {
+        _invulnerabilityCount++;
+    }
+
+    public void RemoveInvulnerability()
+    {
+        _invulnerabilityCount = Mathf.Max(0, _invulnerabilityCount - 1);
+    }
+
     public override void TakeDamage(int damage)
     {
-
-        if (Health <= 0) return;
+        if (IsInvulnerable || Health <= 0)
+            return;
 
         Health -= damage;
 
@@ -61,6 +73,7 @@ public class Player : UnitBase
     public void Respawn(Vector3 spawnPosition)
     {
         Health = maxHealth;
+        _invulnerabilityCount = 0;
         transform.position = spawnPosition;
 
         GetPlayerMovement().enabled = true;
@@ -70,6 +83,10 @@ public class Player : UnitBase
         {
             rb.linearVelocity = Vector3.zero;
         }
+
+        if (playerMovement != null)
+            playerMovement.SetSpeedMultiplier(1f);
+
         bomb.TriggerExplosion(timeTakesToExplode);
     }
 

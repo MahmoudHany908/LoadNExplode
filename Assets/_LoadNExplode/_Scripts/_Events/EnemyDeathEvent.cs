@@ -2,12 +2,14 @@ using UnityEngine;
 
 public struct EnemyDeathEvent : IGameEvent
 {
-    readonly public GameObject EnemyGameObject;
-    readonly public Vector3 DeathPosition;
+    public readonly GameObject EnemyGameObject;
+    public readonly Vector3 DeathPosition;
+    public readonly int GoldReward;
 
-    EnemyDeathEvent(GameObject EnemyGameObject, Vector3 DeathPosition)
+    public EnemyDeathEvent(GameObject enemyGameObject, Vector3 deathPosition, int goldReward)
     {
-        this.EnemyGameObject = EnemyGameObject;
-        this.DeathPosition = DeathPosition;
+        EnemyGameObject = enemyGameObject;
+        DeathPosition = deathPosition;
+        GoldReward = goldReward;
     }
 }

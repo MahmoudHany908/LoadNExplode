@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using System.Linq;
 
 public class MockLeaderboard : ILeaderboardService
 {
@@ -15,18 +16,26 @@ public class MockLeaderboard : ILeaderboardService
         await Task.Delay(500);
 
         List<LeaderboardEntry> fakeScores = new List<LeaderboardEntry>();
+
         for (int i = 1; i <= limit; i++)
         {
             fakeScores.Add(new LeaderboardEntry
             {
-                Rank = i,
-                // Just generating some fake names for testing
-                PlayerName = i == 1 ? "OZOZ" : $"Player_{Random.Range(1000, 9999)}",
-                Score = Random.Range(1, 100)
+                PlayerName = i == 1 ? "FLUX" : $"Player_{Random.Range(1, 100)}",
+                Score = Random.Range(10, 1000)
             });
         }
 
-        Debug.Log("[MOCK] Fetched top scores!");
+        fakeScores = fakeScores.OrderByDescending(entry => entry.Score).ToList();
+
+        for (int i = 0; i < fakeScores.Count; i++)
+        {
+            var entry = fakeScores[i];
+            entry.Rank = i + 1;
+            fakeScores[i] = entry;
+        }
+
+        Debug.Log("[MOCK] Fetched and sorted top scores!");
         return fakeScores;
     }
 }

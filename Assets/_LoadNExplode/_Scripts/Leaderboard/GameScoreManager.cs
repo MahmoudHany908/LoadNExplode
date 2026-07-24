@@ -17,8 +17,8 @@ public class GameScoreManager : MonoBehaviour
         LocalHighScore = PlayerPrefs.GetInt("PersonalBest", 0);
 
        
-        _leaderboardService = new MockLeaderboard();
-        //_leaderboardService = new LiveLeaderboard();
+        //_leaderboardService = new MockLeaderboard();
+        _leaderboardService = new LiveLeaderboard();
     }
 
     private void OnEnable()
@@ -45,12 +45,13 @@ public class GameScoreManager : MonoBehaviour
 
     public async void EndRun(string playerName)
     {
+        await _leaderboardService.SubmitScoreAsync(playerName, CurrentKills);
+
         if (CurrentKills > LocalHighScore)
         {
             LocalHighScore = CurrentKills;
             PlayerPrefs.SetInt("PersonalBest", LocalHighScore);
             PlayerPrefs.Save();
-            await _leaderboardService.SubmitScoreAsync(playerName, LocalHighScore);
         }
 
         CurrentKills = 0;
