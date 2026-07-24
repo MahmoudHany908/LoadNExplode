@@ -63,12 +63,15 @@ Material:
     - _Blend: 0
     - _CastShadows: 0
     - _Cull: 2
-    - _DesolveSlider1: 0.421
-    - _DesolveSlider2: 0.313
+    - _DesolveSlider1: 0
+    - _DesolveSlider2: 0
     - _DstBlend: 0
     - _DstBlendAlpha: 0
+    - _ENABLE_FOR_VFX: 0
+    - _FireDissolve: 0.656
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _SmokeDissolve: 0.309
     - _Smoothstep: 0
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1

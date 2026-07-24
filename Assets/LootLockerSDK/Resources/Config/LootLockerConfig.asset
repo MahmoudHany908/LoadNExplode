@@ -16,7 +16,7 @@ MonoBehaviour:
   adminToken: 3f4a4a8c411b7caeebdcaad745dd876ae6d4e0c7
   domainKey: h1y54g1o
   game_version: 1.0.0.0
-  sdk_version: 8.1.1
+  sdk_version: 
   logLevel: 2
   prettifyJson: 1
   obfuscateLogs: 1
