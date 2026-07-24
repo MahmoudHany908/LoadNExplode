@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 moveDirection;
     private Collider col;
     private Rigidbody rb;
+    private float speedMultiplier = 1f;
 
     void Start()
     {
@@ -31,6 +32,10 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        speedMultiplier = Mathf.Max(0.1f, multiplier);
+    }
 
     void FixedUpdate()
     {
@@ -43,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            ApplyMovement(MoveSpeed);
+            ApplyMovement(MoveSpeed * speedMultiplier);
 
         }
 
