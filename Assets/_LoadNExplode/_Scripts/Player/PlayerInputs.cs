@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem; // Required for the New Input System
+using UnityEngine.InputSystem;
 
 public class PlayerInputs : MonoBehaviour
 {
     private Camera cam;
     public static PlayerInputs Instance { get; private set; }
 
-    // Reference to your generated Input Action class
-    // TODO: Rename "PlayerInputActions" to match your actual generated class name!
     private InputActions input;
 
     void Awake()
@@ -19,19 +17,17 @@ public class PlayerInputs : MonoBehaviour
         }
         Instance = this;
 
-        // Initialize the generated input class
+
         input = new InputActions();
     }
 
     void OnEnable()
     {
-        // Enable the input actions when the object is active
         input.Enable();
     }
 
     void OnDisable()
     {
-        // Disable the input actions when the object is inactive to prevent memory leaks
         input.Disable();
     }
 
@@ -57,6 +53,11 @@ public class PlayerInputs : MonoBehaviour
         Vector3 moveDir = camForward * inputDir.z + camRight * inputDir.x;
 
         return moveDir.normalized;
+    }
+    // this for player sprite flipping 
+    internal float HorizontalMoveDirection()
+    {
+        return input.Player.Move.ReadValue<Vector2>().x;
     }
 
     public Vector3 GetMouseWorldPosition()

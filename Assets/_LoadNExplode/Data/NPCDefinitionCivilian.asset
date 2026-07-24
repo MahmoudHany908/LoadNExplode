@@ -18,7 +18,7 @@ MonoBehaviour:
   FleeSpeed: 5
   PatrolRadius: 30
   VisionRange: 10
-  VisionFOVAngle: 90
+  VisionFOVAngle: 120
   VisionCheckInterval: 0.15
   TargetMask:
     serializedVersion: 2
@@ -30,3 +30,4 @@ MonoBehaviour:
   FleeDistance: 8
   SafeDistance: 12
   SearchDuration: 4
+  CharmedMovementSpeed: 2.5
