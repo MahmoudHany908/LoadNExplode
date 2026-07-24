@@ -6,6 +6,7 @@ public class PlayerVisuals : MonoBehaviour
 
     private Player player;
 
+    public Transform PlayerVisualTransform => playerVisualTransform;
     void Start()
     {
         player = GetComponent<Player>();

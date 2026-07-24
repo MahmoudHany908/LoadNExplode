@@ -6,13 +6,14 @@ public class Player : UnitBase
 {
     [Header("Configuration")]
     [SerializeField] private int maxHealth = 100;
+    [SerializeField] private GameObject deathEffects;
 
     [Header("Component References")]
     private PlayerMovement playerMovement;
     private PlayerVisuals playerVisuals;
     private Bomb bomb;
 
-
+    private float timeTakesToExplode = 10;
     public int Health { get; private set; }
 
     private void Awake()
@@ -24,7 +25,7 @@ public class Player : UnitBase
 
     private void Start()
     {
-
+        bomb.TriggerExplosion(timeTakesToExplode);
         Health = maxHealth;
     }
 
@@ -45,6 +46,16 @@ public class Player : UnitBase
     public override void Die()
     {
         EventBus.Publish(new PlayerDeathEvent(this, transform.position));
+
+        GetPlayerMovement().enabled = false;
+        GetPlayerVisuals().PlayerVisualTransform.gameObject.SetActive(false);
+        GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+
+
+
+        if (deathEffects == null) return;
+        GameObject deathEffectInstance = Instantiate(deathEffects, transform.position, Quaternion.identity);
+        Destroy(deathEffectInstance, 3f);
     }
 
     public void Respawn(Vector3 spawnPosition)
@@ -52,11 +63,14 @@ public class Player : UnitBase
         Health = maxHealth;
         transform.position = spawnPosition;
 
+        GetPlayerMovement().enabled = true;
+        GetPlayerVisuals().PlayerVisualTransform.gameObject.SetActive(true);
+
         if (TryGetComponent(out Rigidbody rb))
         {
             rb.linearVelocity = Vector3.zero;
         }
-        bomb.TriggerExplosion();
+        bomb.TriggerExplosion(timeTakesToExplode);
     }
 
     #region Component Accessors
