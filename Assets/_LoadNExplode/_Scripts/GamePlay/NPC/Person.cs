@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Person : UnitBase
 {
+    [SerializeField] private int goldReward = 1;
+
     private int Health = 100;
 
     public override void TakeDamage(int damage)
@@ -24,7 +26,7 @@ public class Person : UnitBase
 
     public override void Die()
     {
-        EventBus.Publish(new EnemyDeathEvent());
+        EventBus.Publish(new EnemyDeathEvent(gameObject, transform.position, goldReward));
         Destroy(gameObject);
     }
 }
