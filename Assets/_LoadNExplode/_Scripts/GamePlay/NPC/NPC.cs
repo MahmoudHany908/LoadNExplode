@@ -31,7 +31,12 @@ public class NPC : UnitBase
     public override void Die()
     {
         EventBus.Publish(new EnemyDeathEvent());
-        PlayerStats.Instance.GainXP(UnityEngine.Random.Range(10, 30));
+
+        int xp = UnityEngine.Random.Range(20, 30);
+        PlayerStats.Instance.GainXP(xp);
+
+        Debug.Log($"Player Gained{xp}XP By Killing An NPC ");
+
         Destroy(gameObject);
     }
 }
