@@ -119,6 +119,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &85881196
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 85881197}
+  m_Layer: 0
+  m_Name: 3D Sound Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &85881197
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85881196}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.41, y: -0, z: -2.35947}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &123289339
 GameObject:
   m_ObjectHideFlags: 0
@@ -11089,6 +11120,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 932382970}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1021558741
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1021558743}
+  - component: {fileID: 1021558742}
+  m_Layer: 0
+  m_Name: Audio Manager Tester
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1021558742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021558741}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae4446b15d9290c4686cd3e3222df948, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioManagerTester
+  birdSound: {fileID: 8300000, guid: 6bc714f28467b62469d0c01d5c754a85, type: 3}
+  trumpetLoop: {fileID: 8300000, guid: f1c49346cf39ea44cb709772a4a9db1c, type: 3}
+  soundPosition: {fileID: 85881197}
+--- !u!4 &1021558743
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1021558741}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.24347, y: -0, z: -2.35947}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1217263677
 GameObject:
   m_ObjectHideFlags: 0
@@ -11908,6 +11986,10 @@ PrefabInstance:
       propertyPath: Bomb
       value: 
       objectReference: {fileID: 4742648631533895207, guid: c0b30cb319929a744bc98bc6a57a4c5e, type: 3}
+    - target: {fileID: 2212360201679033243, guid: 52f9de8c691fa8d4e8e073f26bf87508, type: 3}
+      propertyPath: deathEffects
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2388474573181985986, guid: 52f9de8c691fa8d4e8e073f26bf87508, type: 3}
       propertyPath: m_LocalPosition.z
       value: -6.5
@@ -12278,3 +12360,5 @@ SceneRoots:
   - {fileID: 278064171}
   - {fileID: 123289342}
   - {fileID: 767521533}
+  - {fileID: 1021558743}
+  - {fileID: 85881197}
