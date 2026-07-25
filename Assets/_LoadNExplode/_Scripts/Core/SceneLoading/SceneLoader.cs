@@ -5,9 +5,8 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     public static SceneLoader Instance { get; private set; }
-
-    [Header("References")]
-    [SerializeField] private GameObject loadingScreenPrefab;
+    
+    private LoadingScreen loadingScreen;
 
     private void Awake()
     {
@@ -19,6 +18,9 @@ public class SceneLoader : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        loadingScreen = GetComponentInChildren<LoadingScreen>();
+        loadingScreen.Disable();
     }
 
     private void OnEnable()
@@ -53,11 +55,10 @@ public class SceneLoader : MonoBehaviour
     {
         EventBus.Publish(new SceneLoadStartEvent(sceneName));
 
-        GameObject screenObj = Instantiate(loadingScreenPrefab);
-        LoadingScreen loadingScreen = screenObj.GetComponent<LoadingScreen>();
         yield return loadingScreen.ShowAsync();
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+        
 
         while (!operation.isDone)
         {
@@ -70,10 +71,9 @@ public class SceneLoader : MonoBehaviour
 
             yield return null;
         }
-
+        
         yield return loadingScreen.HideAsync();
-        Destroy(screenObj);
-
+        
         EventBus.Publish(new SceneLoadCompleteEvent(sceneName));
     }
 }
