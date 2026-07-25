@@ -16,6 +16,7 @@ public class NPCDefinition : ScriptableObject
     public float PatrolSpeed = 2f;
     public float ChaseSpeed = 4.5f;
     public float FleeSpeed = 5f;
+    public float CharmedMovementSpeed = 2.5f;
 
     [Header("PatrolSettings")]
     public float PatrolRadius = 30f;
@@ -29,6 +30,9 @@ public class NPCDefinition : ScriptableObject
 
     [Header("Combat (Hostile only)")]
     public float AttackRange = 2f;
+    public float AttackDamage = 10f;
+    public float AttackCooldown = 1f;
+    public float AttackSphereRadius = 0.5f;
 
     [Header("Flee (Civilian only)")]
     public float FleeDistance = 8f;
@@ -36,7 +40,7 @@ public class NPCDefinition : ScriptableObject
 
     [Header("Search")]
     public float SearchDuration = 4f;
-    [Header("Charmed")]
-    public float CharmedMovementSpeed = 2.5f;
+
+
 
 }

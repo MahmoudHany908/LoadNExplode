@@ -12,7 +12,7 @@ public class NPC : UnitBase
     {
         NPCController = GetComponent<NPCController>();
     }
-
+    public override void TakeDown() { }
     public override void TakeDamage(int damage)
     {
         if (Health >= 0)
@@ -33,12 +33,10 @@ public class NPC : UnitBase
     public override void Die()
     {
         EventBus.Publish(new EnemyDeathEvent(gameObject, transform.position, goldReward));
-        //EventBus.Publish(new EnemyDeathEvent());
 
         int xp = UnityEngine.Random.Range(20, 30);
         PlayerStats.Instance.GainXP(xp);
 
-        Debug.Log($"Player Gained{xp}XP By Killing An NPC ");
 
         Destroy(gameObject);
     }

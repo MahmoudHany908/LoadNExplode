@@ -14,6 +14,7 @@ public class GamePlayManager : MonoBehaviour
     private void OnEnable()
     {
         EventBus.Subscribe<PlayerDeathEvent>(OnPlayerDeath);
+        EventBus.Subscribe<PlayerWasTakenDownEvent>(OnPlayerDeath);
         EventBus.Subscribe<RequestSpawnEvent>(OnSpawnRequested);
 
         EventBus.Subscribe<OnCountdownFinishedEvent>(OnCountdownFinished);
@@ -22,6 +23,7 @@ public class GamePlayManager : MonoBehaviour
     private void OnDisable()
     {
         EventBus.Unsubscribe<PlayerDeathEvent>(OnPlayerDeath);
+        EventBus.Unsubscribe<PlayerWasTakenDownEvent>(OnPlayerDeath);
         EventBus.Unsubscribe<RequestSpawnEvent>(OnSpawnRequested);
 
 
@@ -64,6 +66,11 @@ public class GamePlayManager : MonoBehaviour
     }
 
     private void OnPlayerDeath(PlayerDeathEvent evt)
+    {
+        _palyer = evt.Player;
+        StartCoroutine(ToggleDeathPanel(true, 1.5f));
+    }
+    private void OnPlayerDeath(PlayerWasTakenDownEvent evt)
     {
         _palyer = evt.Player;
         StartCoroutine(ToggleDeathPanel(true, 1.5f));

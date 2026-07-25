@@ -12,7 +12,9 @@ public class PatrolState : INPCState
         if (!ctx.Agent.pathPending && ctx.Agent.remainingDistance < 0.5f)
             ctx.Agent.SetDestination(ctx.NextPatrolPoint());
 
-        if (ctx.CanSeePlayer)
+        if (ctx.CanSeePlayer && ctx.Definition.Behavior == NPCBehaviorType.Hostile)
+            ctx.StateMachine.ChangeState(ctx.States.Chase, ctx);
+        else if (ctx.CanSeePlayer && ctx.Definition.Behavior == NPCBehaviorType.Hostile)
             ctx.StateMachine.ChangeState(ctx.States.Flee, ctx);
     }
     public void Exit(NPCContext ctx) { }

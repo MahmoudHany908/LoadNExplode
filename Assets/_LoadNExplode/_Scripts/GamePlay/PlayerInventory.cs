@@ -1,11 +1,18 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class PlayerInventory : MonoBehaviour
 {
     private const int SlotCount = 2;
 
-    private readonly ShopItemDefinition[] _items = new ShopItemDefinition[SlotCount];
+    [SerializeField] private RectTransform itemSlotParent;
+    [SerializeField] private Key[] slotKeys = new Key[SlotCount] { Key.Digit1, Key.Digit2 };
+
+    private readonly GameObject[] _inventorySlots = new GameObject[SlotCount];
+    private readonly IItem[] _activeItems = new IItem[SlotCount];
+    private readonly List<InputAction> _inputActions = new List<InputAction>();
+
     private Player _player;
 
     public int Count
@@ -13,12 +20,11 @@ public class PlayerInventory : MonoBehaviour
         get
         {
             int count = 0;
-            for (int i = 0; i < _items.Length; i++)
+            for (int i = 0; i < _inventorySlots.Length; i++)
             {
-                if (_items[i] != null)
+                if (_inventorySlots[i] != null)
                     count++;
             }
-
             return count;
         }
     }
@@ -30,43 +36,102 @@ public class PlayerInventory : MonoBehaviour
     private void Awake()
     {
         _player = FindFirstObjectByType<Player>();
+        InitializeInputActions();
+    }
+
+    private void InitializeInputActions()
+    {
+        // Explicitly use the correct path format for numbers
+        string[] paths = { "<Keyboard>/1", "<Keyboard>/2" };
+        
+        int count = Mathf.Min(paths.Length, SlotCount);
+
+        for (int i = 0; i < count; i++)
+        {
+            int slotIndex = i; // capture for closure
+            string bindingPath = paths[i];
+
+            InputAction action = new InputAction(binding: bindingPath);
+
+            action.performed += ctx => TryUseItem(slotIndex);
+
+            action.Enable();
+            _inputActions.Add(action);
+        }
     }
 
     private void Update()
     {
-        Keyboard keyboard = Keyboard.current;
-        if (keyboard == null)
-            return;
+        for (int i = 0; i < _activeItems.Length; i++)
+        {
+            IItem active = _activeItems[i];
+            if (active == null)
+                continue;
 
-        // Slot 0 = key 1, Slot 1 = key 2 (abilities use Z/X/C — no conflict)
-        if (keyboard.digit1Key.wasPressedThisFrame)
-            TryUseItem(0);
-
-        if (keyboard.digit2Key.wasPressedThisFrame)
-            TryUseItem(1);
+            if (active is Object unityObj && unityObj == null)
+            {
+                _activeItems[i] = null;
+                _inventorySlots[i] = null; // Also clear the slot reference if the object is destroyed
+                continue;
+            }
+        }
     }
 
-    public ShopItemDefinition GetItem(int slotIndex)
+    private void OnDestroy()
     {
-        if (slotIndex < 0 || slotIndex >= _items.Length)
-            return null;
-
-        return _items[slotIndex];
+        foreach (var action in _inputActions)
+        {
+            if (action != null)
+            {
+                action.Disable();
+                action.Dispose();
+            }
+        }
+        _inputActions.Clear();
     }
 
-    public bool TryAddItem(ShopItemDefinition item, out int slotIndex)
+    public bool TryAddItem(GameObject itemPrefab, out int slotIndex)
     {
         slotIndex = -1;
 
-        if (item == null)
+        if (itemPrefab == null)
             return false;
 
-        for (int i = 0; i < _items.Length; i++)
+        if (itemSlotParent == null)
         {
-            if (_items[i] != null)
+            Debug.LogWarning("ItemSlotParent is not assigned in PlayerInventory!");
+            return false;
+        }
+
+        for (int i = 0; i < _inventorySlots.Length; i++)
+        {
+            if (_inventorySlots[i] != null)
                 continue;
 
-            _items[i] = item;
+            GameObject instance = Instantiate(itemPrefab, itemSlotParent);
+            _inventorySlots[i] = instance;
+            
+            IItem iitem = instance.GetComponent<IItem>();
+            if (iitem != null)
+            {
+                if (iitem is IPlayerReceivable playerReceivable)
+                    playerReceivable.SetPlayer(_player);
+
+                _activeItems[i] = iitem;
+            }
+            else
+            {
+                Debug.LogWarning($"Item prefab '{itemPrefab.name}' does not have an IItem component.");
+            }
+
+            // Optional: if the prefab has a UI button, hook it up so clicking works like hotkeys
+            UnityEngine.UI.Button btn = instance.GetComponent<UnityEngine.UI.Button>();
+            if (btn != null)
+            {
+                int capturedIndex = i;
+                btn.onClick.AddListener(() => TryUseItem(capturedIndex));
+            }
+
             slotIndex = i;
             EventBus.Publish(new InventoryChangedEvent(this));
             return true;
@@ -75,47 +140,45 @@ public class PlayerInventory : MonoBehaviour
         return false;
     }
 
-    public bool TryAddItem(ShopItemDefinition item)
+    public bool TryAddItem(GameObject itemPrefab)
     {
-        return TryAddItem(item, out _);
+        return TryAddItem(itemPrefab, out _);
     }
 
     public bool TryUseItem(int slotIndex)
     {
-        ShopItemDefinition item = GetItem(slotIndex);
-        if (item == null || item.ItemPrefab == null)
+        if (slotIndex < 0 || slotIndex >= _inventorySlots.Length)
             return false;
 
-        if (_player == null)
-            _player = FindFirstObjectByType<Player>();
+        IItem item = _activeItems[slotIndex];
+        if (item == null)
+            return false;
 
-        ItemUseContext context = BuildUseContext();
+        item.Activate();
 
-        if (item.SpawnBehavior != null)
-            item.SpawnBehavior.Spawn(item.ItemPrefab, context);
-        else
-            Object.Instantiate(item.ItemPrefab, context.PlayerPosition, Quaternion.identity);
-
-        _items[slotIndex] = null;
-        EventBus.Publish(new InventoryChangedEvent(this));
-        return true;
-    }
-
-    private ItemUseContext BuildUseContext()
-    {
-        Vector3 playerPos = _player != null ? _player.transform.position : transform.position;
-        Vector3 aim = Vector3.forward;
-
-        if (_player != null && PlayerInputs.Instance != null)
+        GameObject itemGo = _inventorySlots[slotIndex];
+        if (itemGo != null)
         {
-            Vector3 mouseWorld = PlayerInputs.Instance.GetMouseWorldPosition();
-            aim = mouseWorld - playerPos;
-            aim.y = 0f;
-
-            if (aim.sqrMagnitude < 0.0001f)
-                aim = _player.transform.forward;
+            itemGo.transform.SetParent(null);
+            UnityEngine.UI.Image img = itemGo.GetComponent<UnityEngine.UI.Image>();
+            if (img != null) img.enabled = false;
         }
 
-        return new ItemUseContext(_player, playerPos, aim);
+        // Clear the used slot
+        _inventorySlots[slotIndex] = null;
+        _activeItems[slotIndex] = null;
+
+        // Shift remaining items to the left so they match the UI hierarchy which automatically shifts
+        for (int i = slotIndex; i < _inventorySlots.Length - 1; i++)
+        {
+            _inventorySlots[i] = _inventorySlots[i + 1];
+            _inventorySlots[i + 1] = null;
+
+            _activeItems[i] = _activeItems[i + 1];
+            _activeItems[i + 1] = null;
+        }
+
+        EventBus.Publish(new InventoryChangedEvent(this));
+        return true;
     }
 }

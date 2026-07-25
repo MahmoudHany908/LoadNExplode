@@ -1,8 +1,10 @@
+using UnityEngine;
+
 public struct BuyItemRequestedEvent : IGameEvent
 {
-    public readonly ShopItemDefinition Item;
+    public readonly ItemMetadata Item;
 
-    public BuyItemRequestedEvent(ShopItemDefinition item)
+    public BuyItemRequestedEvent(ItemMetadata item)
     {
         Item = item;
     }
@@ -17,10 +19,10 @@ public enum BuyItemFailReason
 
 public struct BuyItemFailedEvent : IGameEvent
 {
-    public readonly ShopItemDefinition Item;
+    public readonly ItemMetadata Item;
     public readonly BuyItemFailReason Reason;
 
-    public BuyItemFailedEvent(ShopItemDefinition item, BuyItemFailReason reason)
+    public BuyItemFailedEvent(ItemMetadata item, BuyItemFailReason reason)
     {
         Item = item;
         Reason = reason;
@@ -29,10 +31,10 @@ public struct BuyItemFailedEvent : IGameEvent
 
 public struct BuyItemSucceededEvent : IGameEvent
 {
-    public readonly ShopItemDefinition Item;
+    public readonly ItemMetadata Item;
     public readonly int SlotIndex;
 
-    public BuyItemSucceededEvent(ShopItemDefinition item, int slotIndex)
+    public BuyItemSucceededEvent(ItemMetadata item, int slotIndex)
     {
         Item = item;
         SlotIndex = slotIndex;
