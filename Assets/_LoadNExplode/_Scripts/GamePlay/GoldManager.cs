@@ -26,9 +26,6 @@ public class GoldManager : MonoBehaviour
         EventBus.Unsubscribe<EnemyDeathEvent>(OnEnemyDeath);
     }
 
-
-
-
     private void OnEnemyDeath(EnemyDeathEvent evt)
     {
         if (evt.GoldReward <= 0)

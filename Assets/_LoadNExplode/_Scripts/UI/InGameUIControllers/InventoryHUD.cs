@@ -55,6 +55,7 @@ public class InventoryHUD : MonoBehaviour
 
     private void OnInventoryChanged(InventoryChangedEvent evt)
     {
+        Debug.Log($"[DEBUG] InventoryHUD received InventoryChangedEvent for instance {evt.Inventory?.GetInstanceID()}. My current 'inventory' field instance was {inventory?.GetInstanceID()}.");
         inventory = evt.Inventory;
         Refresh();
     }
@@ -62,14 +63,19 @@ public class InventoryHUD : MonoBehaviour
     private void Refresh()
     {
         if (inventory == null)
+        {
+            Debug.Log("[DEBUG] Refresh() bailed early: inventory field is null.");
             return;
+        }
 
         int slotCount = Mathf.Max(slotIcons.Count, slotNames.Count);
+        Debug.Log($"[DEBUG] Refresh() running on inventory instance {inventory.GetInstanceID()}, slotCount={slotCount}, slotIcons.Count={slotIcons.Count}, slotNames.Count={slotNames.Count}");
 
         for (int i = 0; i < slotCount; i++)
         {
             ShopItemDefinition item = inventory.GetItem(i);
             bool hasItem = item != null;
+            Debug.Log($"[DEBUG] Slot {i}: GetItem returned {(hasItem ? item.ItemName : "null")}");
 
             if (i < slotIcons.Count && slotIcons[i] != null)
             {

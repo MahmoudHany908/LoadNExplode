@@ -5,7 +5,7 @@ using UnityEngine;
 /// Mine logic: arm delay, NPC trigger explodes, player touch kills player without exploding.
 /// </summary>
 [RequireComponent(typeof(Collider))]
-public class MineItem : MonoBehaviour
+public class MineItem : MonoBehaviour, IItem
 {
     [Header("Arming")]
     [SerializeField] private float armDelay = 1.5f;
@@ -29,9 +29,20 @@ public class MineItem : MonoBehaviour
             armedVisual.SetActive(false);
     }
 
-    private void Start()
+    // Called once when the item is spawned, mirrors IAbility.Started()
+    public void Started()
     {
         StartCoroutine(ArmCoroutine());
+    }
+
+    // Mines have no per-use activation trigger beyond the physical world;
+    // Activate() is a no-op to satisfy IItem, arming/exploding is driven by triggers.
+    public void Activate()
+    {
+    }
+
+    public void Tick(float _deltaTime)
+    {
     }
 
     private IEnumerator ArmCoroutine()

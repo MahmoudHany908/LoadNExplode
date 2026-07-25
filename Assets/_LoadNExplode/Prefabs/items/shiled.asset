@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 74f181c7a8634a83b5f947aaefcf6b69, type: 3}
-  m_Name: ShopItemDefinition 2
+  m_Name: shiled
   m_EditorClassIdentifier: Assembly-CSharp::ShopItemDefinition
-  itemName: heroin
+  itemName: shiled
   icon: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
   price: 5
-  itemPrefab: {fileID: 4025106644317625478, guid: fa42e3bfe976a254498ec22b597c823e, type: 3}
-  spawnBehavior: {fileID: 11400000, guid: 935b05219baafe84ebc1b280ff9d86a8, type: 2}
+  itemPrefab: {fileID: 3676655298889818314, guid: b2c916162fcd37d4e930ef4404e5b81b, type: 3}
+  spawnBehavior: {fileID: 11400000, guid: b3ee06ebefdec844a87524d10eeb4c01, type: 2}
