@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f9724b6a8268b954191cfeeefd6d4adc, type: 3}
-  m_Name: NPCDefinitionCivilian
+  m_Name: NPCDefinitionPolice
   m_EditorClassIdentifier: Assembly-CSharp::NPCDefinition
-  Behavior: 0
+  Behavior: 1
   PatrolSpeed: 3
   ChaseSpeed: 6
   FleeSpeed: 5
   CharmedMovementSpeed: 2.5
   PatrolRadius: 30
-  VisionRange: 10
-  VisionFOVAngle: 120
+  VisionRange: 15
+  VisionFOVAngle: 140
   VisionCheckInterval: 0.15
   TargetMask:
     serializedVersion: 2
@@ -32,5 +32,5 @@ MonoBehaviour:
   AttackCooldown: 1
   AttackSphereRadius: 0.5
   FleeDistance: 8
-  SafeDistance: 15
-  SearchDuration: 4
+  SafeDistance: 12
+  SearchDuration: 6

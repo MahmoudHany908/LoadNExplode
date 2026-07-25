@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour, ILaunchable
     private Player player;
     private Vector3 moveDirection;
     private Collider col;
-    private Rigidbody rb;
+    [HideInInspector] public Rigidbody rb;
     private float speedMultiplier = 1f;
 
 

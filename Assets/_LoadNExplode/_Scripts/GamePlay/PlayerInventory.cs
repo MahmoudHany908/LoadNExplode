@@ -38,7 +38,6 @@ public class PlayerInventory : MonoBehaviour
         if (keyboard == null)
             return;
 
-        // Slot 0 = key 1, Slot 1 = key 2 (abilities use Z/X/C — no conflict)
         if (keyboard.digit1Key.wasPressedThisFrame)
             TryUseItem(0);
 
@@ -82,6 +81,7 @@ public class PlayerInventory : MonoBehaviour
 
     public bool TryUseItem(int slotIndex)
     {
+        // 
         ShopItemDefinition item = GetItem(slotIndex);
         if (item == null || item.ItemPrefab == null)
             return false;

@@ -12,3 +12,14 @@ public struct PlayerDeathEvent : IGameEvent
     }
 }
 
+public struct PlayerWasTakenDownEvent : IGameEvent
+{
+    public readonly Player Player;
+
+
+    public PlayerWasTakenDownEvent(Player player)
+    {
+        this.Player = player;
+
+    }
+}

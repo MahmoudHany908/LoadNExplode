@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(PlayerMovement), typeof(PlayerVisuals))]
@@ -12,9 +13,10 @@ public class Player : UnitBase
     private PlayerMovement playerMovement;
     private PlayerVisuals playerVisuals;
     private Bomb bomb;
-
+    private CapsuleCollider _collider;
     private float timeTakesToExplode = 10;
     private int _invulnerabilityCount;
+
     public int Health { get; private set; }
     public bool IsInvulnerable => _invulnerabilityCount > 0;
 
@@ -22,13 +24,18 @@ public class Player : UnitBase
     {
         playerMovement = GetComponent<PlayerMovement>();
         playerVisuals = GetComponent<PlayerVisuals>();
+        _collider = GetComponent<CapsuleCollider>();
         bomb = GetComponentInChildren<Bomb>();
     }
 
     private void Start()
     {
-        bomb.TriggerExplosion(timeTakesToExplode);
         Health = maxHealth;
+
+        if (bomb != null)
+        {
+            bomb.TriggerExplosion(timeTakesToExplode);
+        }
     }
 
     public void AddInvulnerability()
@@ -39,6 +46,27 @@ public class Player : UnitBase
     public void RemoveInvulnerability()
     {
         _invulnerabilityCount = Mathf.Max(0, _invulnerabilityCount - 1);
+    }
+
+
+    public override void TakeDown()
+    {
+        if (bomb != null)
+        {
+            bomb.Defuse();
+        }
+        _collider.enabled = false;
+        GetPlayerMovement().rb.isKinematic = true;
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = false;
+        }
+
+        EventBus.Publish(new PlayerWasTakenDownEvent(player: this));
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = false;
+        }
     }
 
     public override void TakeDamage(int damage)
@@ -59,13 +87,31 @@ public class Player : UnitBase
     {
         EventBus.Publish(new PlayerDeathEvent(this, transform.position));
 
-        GetPlayerMovement().enabled = false;
-        GetPlayerVisuals().PlayerVisualTransform.gameObject.SetActive(false);
-        GetComponent<Rigidbody>().linearVelocity = Vector3.zero;
+        if (bomb != null)
+        {
+            bomb.Defuse(" ");
+        }
 
 
+        _collider.enabled = false;
+        GetPlayerMovement().rb.isKinematic = true;
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = false;
+        }
+
+        if (playerVisuals != null)
+        {
+            playerVisuals.PlayerVisualTransform.gameObject.SetActive(false);
+        }
+
+        if (TryGetComponent(out Rigidbody rb))
+        {
+            rb.linearVelocity = Vector3.zero;
+        }
 
         if (deathEffects == null) return;
+
         GameObject deathEffectInstance = Instantiate(deathEffects, transform.position, Quaternion.identity);
         Destroy(deathEffectInstance, 3f);
     }
@@ -76,20 +122,41 @@ public class Player : UnitBase
         _invulnerabilityCount = 0;
         transform.position = spawnPosition;
 
-        GetPlayerMovement().enabled = true;
-        GetPlayerVisuals().PlayerVisualTransform.gameObject.SetActive(true);
+        // Re-enable movement and visuals
 
+        StartCoroutine(ToggleComponents());
+
+        // Reset physics velocity
         if (TryGetComponent(out Rigidbody rb))
         {
             rb.linearVelocity = Vector3.zero;
         }
 
-        if (playerMovement != null)
-            playerMovement.SetSpeedMultiplier(1f);
 
-        bomb.TriggerExplosion(timeTakesToExplode);
+
+        // Restart the bomb countdown on respawn
+        if (bomb != null)
+        {
+            bomb.TriggerExplosion(timeTakesToExplode);
+        }
     }
+    private IEnumerator ToggleComponents()
+    {
+        yield return new WaitForSeconds(0.5f);
+        _collider.enabled = true;
+        GetPlayerMovement().rb.isKinematic = false;
+        if (playerMovement != null)
+        {
+            playerMovement.enabled = true;
+            playerMovement.SetSpeedMultiplier(1f);
+        }
 
+        if (playerVisuals != null)
+        {
+            playerVisuals.PlayerVisualTransform.gameObject.SetActive(true);
+        }
+
+    }
     #region Component Accessors
 
     public PlayerMovement GetPlayerMovement() => playerMovement;
