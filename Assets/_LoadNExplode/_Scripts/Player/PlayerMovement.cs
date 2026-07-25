@@ -1,3 +1,4 @@
+using _LoadNExplode._Scripts.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -22,13 +23,15 @@ public class PlayerMovement : MonoBehaviour, ILaunchable
     private Player player;
     private Vector3 moveDirection;
     private Collider col;
+    private PlayerSprite sprite;
+    private bool isWalking = true;
     [HideInInspector] public Rigidbody rb;
     private float speedMultiplier = 1f;
-
 
     [Header("Launch")]
     [SerializeField] private float launchControlLockTime = 0.3f;
     private float _launchLockTimer;
+    
 
     public void Launch(Vector3 velocity, LaunchApplyMode mode, LaunchPad source)
     {
@@ -52,6 +55,7 @@ public class PlayerMovement : MonoBehaviour, ILaunchable
         player = GetComponent<Player>();
         col = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
+        sprite = GetComponentInChildren<PlayerSprite>();
     }
 
     public void SetSpeedMultiplier(float multiplier)
@@ -74,7 +78,30 @@ public class PlayerMovement : MonoBehaviour, ILaunchable
 
         }
 
+        HandleSprite();
+
     }
+
+
+    private void HandleSprite() {
+        if (moveDirection.magnitude > Mathf.Epsilon && !isWalking) {
+            isWalking = true;
+            sprite.SwitchToWalk();
+            //TODO: osama, see what yo uwant to do here....
+        } else if (moveDirection.magnitude == 0 && isWalking) {
+            isWalking = false;
+            sprite.SwitchToIdle();
+        }
+
+        if (moveDirection.x < 0) {
+            sprite.FlipSprite(true);
+        } else if (moveDirection.x > 0) {
+            sprite.FlipSprite(false);
+        }
+    }
+    
+
+
 
     private void ApplyMovement(float speed)
     {
@@ -90,12 +117,13 @@ public class PlayerMovement : MonoBehaviour, ILaunchable
             Vector3 targetVelocity = moveDirection * speed;
             targetVelocity.y = rb.linearVelocity.y;
             rb.linearVelocity = targetVelocity;
-
         }
         if (!IsGrounded())
         {
             rb.AddForce(Vector3.down * downwordForce, ForceMode.VelocityChange);
         }
+        
+        
     }
 
 

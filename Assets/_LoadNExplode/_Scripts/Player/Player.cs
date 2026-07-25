@@ -51,6 +51,9 @@ public class Player : UnitBase
 
     public override void TakeDown()
     {
+        if (IsInvulnerable)
+            return;
+
         if (bomb != null)
         {
             bomb.Defuse();
