@@ -33,6 +33,13 @@ public class ShopManager : MonoBehaviour
             return;
         }
 
+        if (evt.Item.ItemPrefab == null)
+        {
+            Debug.LogWarning($"[Shop] Buy failed: ItemMetadata '{evt.Item.ItemName}' has no ItemPrefab assigned.");
+            EventBus.Publish(new BuyItemFailedEvent(evt.Item, BuyItemFailReason.InvalidRequest));
+            return;
+        }
+
         if (!playerInventory.HasFreeSlot)
         {
             EventBus.Publish(new BuyItemFailedEvent(evt.Item, BuyItemFailReason.InventoryFull));
@@ -47,7 +54,7 @@ public class ShopManager : MonoBehaviour
             return;
         }
 
-        if (!playerInventory.TryAddItem(evt.Item, out int slotIndex))
+        if (!playerInventory.TryAddItem(evt.Item.ItemPrefab, out int slotIndex))
         {
             // Should be rare: slot check passed but add failed. Refund gold.
             goldManager.AddGold(evt.Item.Price);

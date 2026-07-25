@@ -16,14 +16,14 @@ public class ShieldItem : MonoBehaviour, IItem, IPlayerReceivable
         _player = player;
     }
 
-    // Called once when the item is spawned, mirrors IAbility.Started()
-    public void Started()
+    // Called once when the item is spawned
+    private void Start()
     {
         if (_player == null)
             _player = GetComponentInParent<Player>();
     }
 
-    // The shield turns on immediately on use, mirrors IAbility.Activate()
+    // The shield turns on immediately on use
     public void Activate()
     {
         if (_player != null)
@@ -32,7 +32,7 @@ public class ShieldItem : MonoBehaviour, IItem, IPlayerReceivable
         StartCoroutine(ExpireCoroutine());
     }
 
-    public void Tick(float _deltaTime)
+    private void Update()
     {
         if (_player == null)
             return;
@@ -46,6 +46,14 @@ public class ShieldItem : MonoBehaviour, IItem, IPlayerReceivable
     {
         yield return new WaitForSeconds(duration);
         Destroy(gameObject);
+    }
+
+    public void Started()
+    {
+    }
+
+    public void Tick(float deltaTime)
+    {
     }
 
     private void OnDestroy()

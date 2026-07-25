@@ -17,8 +17,8 @@ public class HeroinItem : MonoBehaviour, IItem, IPlayerReceivable
         _player = player;
     }
 
-    // Called once when the item is spawned, mirrors IAbility.Started()
-    public void Started()
+    // Called once when the item is spawned
+    private void Start()
     {
         if (_player == null)
             _player = GetComponentInParent<Player>();
@@ -36,14 +36,18 @@ public class HeroinItem : MonoBehaviour, IItem, IPlayerReceivable
         StartCoroutine(ExpireCoroutine());
     }
 
-    public void Tick(float _deltaTime)
-    {
-    }
-
     private IEnumerator ExpireCoroutine()
     {
         yield return new WaitForSeconds(duration);
         Destroy(gameObject);
+    }
+
+    public void Started()
+    {
+    }
+
+    public void Tick(float deltaTime)
+    {
     }
 
     private void OnDestroy()
