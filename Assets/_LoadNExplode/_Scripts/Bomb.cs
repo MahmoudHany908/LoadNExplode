@@ -54,7 +54,7 @@ public class Bomb : MonoBehaviour
         {
             bombVisual.SetActive(true);
             Vector3 currentScale = bombVisual.transform.localScale;
-            bombVisual.transform.localScale = new Vector3(_explosionRadius, currentScale.y, _explosionRadius);
+            bombVisual.transform.localScale = new Vector3(_explosionRadius * 2f, currentScale.y, _explosionRadius * 2f);
         }
 
         _countdownCoroutine = StartCoroutine(CountdownAndExplodeCoroutine(timeToExplode));

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -59,7 +59,6 @@ public class Player : UnitBase
             bomb.Defuse();
         }
         _collider.enabled = false;
-        GetPlayerMovement().rb.isKinematic = true;
         if (playerMovement != null)
         {
             playerMovement.enabled = false;
@@ -70,6 +69,7 @@ public class Player : UnitBase
         {
             playerMovement.enabled = false;
         }
+        GetPlayerMovement().rb.isKinematic = true;
     }
 
     public override void TakeDamage(int damage)
@@ -130,7 +130,7 @@ public class Player : UnitBase
         StartCoroutine(ToggleComponents());
 
         // Reset physics velocity
-        if (TryGetComponent(out Rigidbody rb))
+        if (TryGetComponent(out Rigidbody rb) && !rb.isKinematic)
         {
             rb.linearVelocity = Vector3.zero;
         }
