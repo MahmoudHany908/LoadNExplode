@@ -6,18 +6,25 @@
   <component name="ChangeListManager">
     <list default="true" id="49b487ae-0869-413b-844a-9b46477d88a6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LoadNExplode/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LoadNExplode/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/VFX/RunSmokeVFX.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/VFX/RunSmokeVFX.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Sprites/UI/BombMask.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Sprites/UI/BombMask.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Sprites/UI/BombMask.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Sprites/UI/BombMask.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Sprites/UI/BombPattern.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Sprites/UI/BombPattern.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Sprites/UI/BombPattern.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Sprites/UI/BombPattern.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/SceneLoader.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/SceneLoader.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/UI/LoadingScreenCanvasPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/UI/LoadingScreenCanvasPrefab.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTest/AbdoMainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTest/AbdoMainMenuScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTest/AbdoTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTest/AbdoTestScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Shaders/Shaders/SpriteShader/CustomSpriteMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Shaders/Shaders/SpriteShader/CustomSpriteMaterial.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Player/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Player/PlayerMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Core/SceneLoading/LoadingScreen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Core/SceneLoading/LoadingScreen.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Core/SceneLoading/SceneLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Core/SceneLoading/SceneLoader.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.kyrylokuzyk.primetween@d4fabb15325a/Runtime/Internal/PrimeTweenManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Programs/Unity/6000.3.15f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.render-pipelines.core/Runtime/Common/ComponentSingleton.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Programs/Unity/6000.3.15f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.render-pipelines.core/Runtime/Debugging/DebugUpdater.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -107,7 +114,8 @@
       <workItem from="1784988072456" duration="503000" />
       <workItem from="1784988729393" duration="1863000" />
       <workItem from="1784992890443" duration="760000" />
-      <workItem from="1785001313585" duration="1125000" />
+      <workItem from="1785001313585" duration="1481000" />
+      <workItem from="1785006902341" duration="6595000" />
     </task>
     <servers />
   </component>
