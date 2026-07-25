@@ -25,7 +25,7 @@ public class ExplosiveBarrel : MonoBehaviour, IDamageable
             _explosionRadiusVisual.SetActive(false);
         }
     }
-
+    public void TakeDown() { }
     public void TakeDamage(int damage)
     {
         if (_isExplode) return;

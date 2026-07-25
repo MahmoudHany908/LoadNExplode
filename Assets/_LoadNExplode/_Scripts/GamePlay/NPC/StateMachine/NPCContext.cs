@@ -10,6 +10,7 @@ public class NPCContext
     public NPCDefinition Definition;
     public NPCStateMachine StateMachine;
     public NPCStates States;
+    public float AttackCooldownTimer;
 
     public Vector3 SpawnPosition;
 
