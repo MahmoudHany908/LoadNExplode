@@ -6,18 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="49b487ae-0869-413b-844a-9b46477d88a6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LoadNExplode/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LoadNExplode/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/SampleSceneProfile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/SampleSceneProfile.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTestScene.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTestScene.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Shaders/Materials/TestGridMaterial.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Shaders/Materials/TestGridMaterial.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Shaders/Materials/TestWhiteMaterial.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Shaders/Materials/TestWhiteMaterial.mat.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Shaders/Shaders/SpriteShader/CustomSpriteShader.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Shaders/Shaders/SpriteShader/CustomSpriteShader.shadergraph" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Player.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/VFX/RunSmokeVFX.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/VFX/RunSmokeVFX.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTest/AbdoMainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTest/AbdoMainMenuScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTest/AbdoTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTest/AbdoTestScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Shaders/Shaders/SpriteShader/CustomSpriteMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Shaders/Shaders/SpriteShader/CustomSpriteMaterial.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Player/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Player/PlayerMovement.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,6 +107,7 @@
       <workItem from="1784988072456" duration="503000" />
       <workItem from="1784988729393" duration="1863000" />
       <workItem from="1784992890443" duration="760000" />
+      <workItem from="1785001313585" duration="1125000" />
     </task>
     <servers />
   </component>
