@@ -1,30 +1,27 @@
 using System.Collections;
 using UnityEngine;
 
-public class ExplosiveBarrel : MonoBehaviour, IDamageable
+public class ExplosiveBarrel : MonoBehaviour, IDamageable, ILaunchable
 {
     [Header("Settings")]
     [SerializeField] private float _explosionRadius;
-    [SerializeField] private float _timeToExplode = 1.5f;
+    [SerializeField] private float _timeToExplode = 0.25f;
     [SerializeField] private int _explosionDamage = 100;
     [SerializeField] private LayerMask _explosionLayers;
 
+    [Tooltip("The minimum speed required to trigger the explosion")]
+    public float explosionThreshold = 10f;
+
+
     [Header("Effects")]
     [SerializeField] private GameObject _explodeEffectsPrefab;
-    [SerializeField] private GameObject _explosionRadiusVisual;
     [SerializeField] private AudioClip _explosionSound;
 
-    public Vector3 Position => transform.position;
 
     private bool _isExplode = false;
+    private Rigidbody rb;
 
-    private void Start()
-    {
-        if (_explosionRadiusVisual != null)
-        {
-            _explosionRadiusVisual.SetActive(false);
-        }
-    }
+    public Vector3 Position => transform.position;
     public void TakeDown() { }
     public void TakeDamage(int damage)
     {
@@ -33,19 +30,14 @@ public class ExplosiveBarrel : MonoBehaviour, IDamageable
         StartCoroutine(StartExplosion());
     }
 
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
     private IEnumerator StartExplosion()
     {
-        if (_explosionRadiusVisual != null)
-        {
-            _explosionRadiusVisual.SetActive(true);
-
-            Vector3 currentScale = _explosionRadiusVisual.transform.localScale;
-
-            _explosionRadiusVisual.transform.localScale = new Vector3(_explosionRadius, currentScale.y, _explosionRadius);
-        }
-
         yield return new WaitForSecondsRealtime(_timeToExplode);
-
         Explode();
     }
 
@@ -72,5 +64,33 @@ public class ExplosiveBarrel : MonoBehaviour, IDamageable
         }
 
         Destroy(gameObject);
+    }
+
+    public void Launch(Vector3 velocity, LaunchApplyMode mode, LaunchPad source)
+    {
+        if (rb)
+            switch (mode)
+            {
+                case LaunchApplyMode.SetVelocityDirect:
+                    rb.linearVelocity = velocity;
+                    break;
+                case LaunchApplyMode.VelocityChange:
+                    rb.AddForce(velocity, ForceMode.VelocityChange);
+                    break;
+                case LaunchApplyMode.Impulse:
+
+                    rb.AddForce(velocity, ForceMode.Impulse);
+                    break;
+            }
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log("ColCol");
+        if (rb != null && rb.linearVelocity.magnitude >= explosionThreshold)
+        {
+            StartCoroutine(StartExplosion());
+        }
     }
 }

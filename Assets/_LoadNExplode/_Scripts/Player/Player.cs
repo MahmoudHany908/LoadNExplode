@@ -94,7 +94,6 @@ public class Player : UnitBase
 
 
         _collider.enabled = false;
-        GetPlayerMovement().rb.isKinematic = true;
         if (playerMovement != null)
         {
             playerMovement.enabled = false;
@@ -108,6 +107,7 @@ public class Player : UnitBase
         if (TryGetComponent(out Rigidbody rb))
         {
             rb.linearVelocity = Vector3.zero;
+            rb.isKinematic = true;
         }
 
         if (deathEffects == null) return;
