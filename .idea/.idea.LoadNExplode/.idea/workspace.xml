@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49b487ae-0869-413b-844a-9b46477d88a6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.LoadNExplode/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LoadNExplode/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Abilities/BaseAbilityPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Abilities/BaseAbilityPrefab.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Abilities/BoomyJumpPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Abilities/BoomyJumpPrefab.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Abilities/DeadlyLoveAbilityPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Abilities/DeadlyLoveAbilityPrefab.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Abilities/SprintAblility.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Abilities/SprintAblility.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Items/BarrelRainPrefabItem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Items/BarrelRainPrefabItem.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Items/HeroinPrefabItem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Items/HeroinPrefabItem.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Items/StunGrenadePrefabItem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Items/StunGrenadePrefabItem.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/UI/DeathPanelUI(Shop&amp;Map).prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/UI/DeathPanelUI(Shop&amp;Map).prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/UI/LoadingScreenCanvasPrefabBackup.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/UI/LoadingScreenCanvasPrefabBackup.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/UI/RunEndCanvasPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/UI/RunEndCanvasPrefab.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/GameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/MainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/MainMenuScene.unity" afterDir="false" />
-    </list>
+    <list default="true" id="49b487ae-0869-413b-844a-9b46477d88a6" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
