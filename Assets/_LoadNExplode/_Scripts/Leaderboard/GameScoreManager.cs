@@ -6,6 +6,7 @@ public class GameScoreManager : MonoBehaviour
 
     public int CurrentKills { get; private set; }
     public int LocalHighScore { get; private set; }
+    public float CurrentPanicLevel { get; private set; } = 1f;
 
     private ILeaderboardService _leaderboardService;
 
@@ -35,7 +36,8 @@ public class GameScoreManager : MonoBehaviour
     private void HandleEnemyKilled(EnemyDeathEvent deathEvent)
     {
         AddKill();
-        Debug.Log($"Enemy Killed at {deathEvent.DeathPosition}. Total Kills: {CurrentKills}");
+        CurrentPanicLevel += 1f;
+        Debug.Log($"Enemy Killed: {deathEvent.BehaviorType} at {deathEvent.DeathPosition}. Total Kills: {CurrentKills}, New Panic Level: {CurrentPanicLevel}");
     }
 
     public void AddKill()

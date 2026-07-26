@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 
 public class NPC : UnitBase
@@ -32,7 +32,7 @@ public class NPC : UnitBase
 
     public override void Die()
     {
-        EventBus.Publish(new EnemyDeathEvent(gameObject, transform.position, goldReward));
+        EventBus.Publish(new EnemyDeathEvent(gameObject, transform.position, goldReward, NPCController.Definition.Behavior));
 
         int xp = UnityEngine.Random.Range(20, 30);
         PlayerStats.Instance.GainXP(xp);

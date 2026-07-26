@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class NPCController : MonoBehaviour, ILaunchable
 {
     [SerializeField] private NPCDefinition definition;
+    public NPCDefinition Definition => definition;
     [SerializeField] private Transform eye;                // vision origin - defaults to this transform
     [SerializeField] private Transform player;              // auto-found via "Player" tag if left empty
 
