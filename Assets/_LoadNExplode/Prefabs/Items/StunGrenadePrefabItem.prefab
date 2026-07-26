@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StunGrenadeItem
   grenadePrefab: {fileID: 5090234239201782469, guid: e28612c060222894ea213b26aefedac3, type: 3}
-  throwForce: 12
+  throwForce: 10
   upwardForce: 2
   throwPoint: {fileID: 0}
   aimLayerMask:
