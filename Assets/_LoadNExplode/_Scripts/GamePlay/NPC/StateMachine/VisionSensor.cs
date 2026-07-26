@@ -21,7 +21,9 @@ public class VisionSensor
     {
         if (target == null) return false;
 
-        Vector3 dir = target.position - _eye.position;
+        // Target the upper body instead of the feet/origin to prevent the raycast from hitting the floor.
+        Vector3 targetPos = target.position + Vector3.up * 1.5f;
+        Vector3 dir = targetPos - _eye.position;
         float dist = dir.magnitude;
         if (dist > _range) return false;
 

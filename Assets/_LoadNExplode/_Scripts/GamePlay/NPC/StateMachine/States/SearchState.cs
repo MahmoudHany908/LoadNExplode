@@ -65,7 +65,10 @@ public class SearchState : INPCState
 
     public void Exit(NPCContext ctx)
     {
-        ctx.Agent.isStopped = false;
+        if (ctx.Agent != null && ctx.Agent.isOnNavMesh)
+        {
+            ctx.Agent.isStopped = false;
+        }
     }
 
     private void PickLookDirection(NPCContext ctx)
