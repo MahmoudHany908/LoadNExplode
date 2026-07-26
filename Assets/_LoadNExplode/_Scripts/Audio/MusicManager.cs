@@ -52,7 +52,7 @@ namespace _LoadNExplode._Scripts.Audio
         public void PlayFootstep() {
             int index = Random.Range(0, footsteps.Count);
             var footstepAudio = footsteps[index];
-            AudioManager.PlaySound(footstepAudio, 0.5f);
+            AudioManager.PlaySound(footstepAudio, 0.3f);
         }
 
         public void PlayDeath() {
@@ -61,7 +61,7 @@ namespace _LoadNExplode._Scripts.Audio
         }
 
         public void PlayCoin() {
-            AudioManager.PlaySound(Coin, 0.6f);
+            AudioManager.PlaySound(Coin, 1.2f);
         }
     }
 }

@@ -113,9 +113,7 @@ public class Player : UnitBase
             rb.linearVelocity = Vector3.zero;
             rb.isKinematic = true;
         }
-
-        MusicManager.Instance.PlayDeath();
-
+        
         if (deathEffects == null) return;
 
         GameObject deathEffectInstance = Instantiate(deathEffects, transform.position, Quaternion.identity);

@@ -17,8 +17,9 @@ public class GoldPickup : MonoBehaviour
     {
         if (other.TryGetComponent(out Player player))
         {
-            goldManager.AddGold(amount);
+            Debug.Log("play coin");
             MusicManager.Instance.PlayCoin();
+            goldManager.AddGold(amount);
             Destroy(gameObject);
         }
 

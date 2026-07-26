@@ -51,7 +51,7 @@ public class GamePlaySceneCountdown : MonoBehaviour
     private void OnCountdownFinished()
     {
         Debug.Log("Countdown finished! Firing event...");
-
+        MusicManager.Instance.PlayDeath();
         EventBus.Publish(new OnCountdownFinishedEvent());
         this.enabled = false;
     }

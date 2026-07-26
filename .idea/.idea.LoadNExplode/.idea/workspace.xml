@@ -6,19 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="49b487ae-0869-413b-844a-9b46477d88a6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LoadNExplode/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LoadNExplode/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Exlosive Barrel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Exlosive Barrel.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTest/AbdoMainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTest/AbdoMainMenuScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/GameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/MainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/MainMenuScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/MainMenuScene.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/MainMenuScene.unity.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Core/SceneLoading/SceneLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Core/SceneLoading/SceneLoader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Audio/MusicManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Audio/MusicManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/GamePlay/GamePlaySceneCountdown.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/GamePlay/GamePlaySceneCountdown.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Player/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Player/Player.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Player/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Player/PlayerMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/UI/CursorUI/CursorClickUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/UI/CursorUI/CursorClickUI.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
