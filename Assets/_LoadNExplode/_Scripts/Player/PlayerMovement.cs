@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour, ILaunchable
     [Header("Launch")]
     [SerializeField] private float launchControlLockTime = 0.3f;
     private float _launchLockTimer;
-    
+
 
     public void Launch(Vector3 velocity, LaunchApplyMode mode, LaunchPad source)
     {
@@ -70,7 +70,7 @@ public class PlayerMovement : MonoBehaviour, ILaunchable
 
         if (Keyboard.current.leftShiftKey.IsPressed())
         {
-            //ApplyMovement(MoveSpeed * sprintMuiltiplair);  sprint add or remove
+            ApplyMovement(MoveSpeed * sprintMuiltiplair * speedMultiplier);
         }
         else
         {
@@ -83,23 +83,30 @@ public class PlayerMovement : MonoBehaviour, ILaunchable
     }
 
 
-    private void HandleSprite() {
-        if (moveDirection.magnitude > Mathf.Epsilon && !isWalking) {
+    private void HandleSprite()
+    {
+        if (moveDirection.magnitude > Mathf.Epsilon && !isWalking)
+        {
             isWalking = true;
             sprite.SwitchToWalk();
             //TODO: osama, see what yo uwant to do here....
-        } else if (moveDirection.magnitude == 0 && isWalking) {
+        }
+        else if (moveDirection.magnitude == 0 && isWalking)
+        {
             isWalking = false;
             sprite.SwitchToIdle();
         }
 
-        if (moveDirection.x < 0) {
+        if (moveDirection.x < 0)
+        {
             sprite.FlipSprite(true);
-        } else if (moveDirection.x > 0) {
+        }
+        else if (moveDirection.x > 0)
+        {
             sprite.FlipSprite(false);
         }
     }
-    
+
 
 
 
@@ -116,14 +123,15 @@ public class PlayerMovement : MonoBehaviour, ILaunchable
 
             Vector3 targetVelocity = moveDirection * speed;
             targetVelocity.y = rb.linearVelocity.y;
-            rb.linearVelocity = targetVelocity;
+            if (!rb.isKinematic)
+                rb.linearVelocity = targetVelocity;
         }
         if (!IsGrounded())
         {
             rb.AddForce(Vector3.down * downwordForce, ForceMode.VelocityChange);
         }
-        
-        
+
+
     }
 
 

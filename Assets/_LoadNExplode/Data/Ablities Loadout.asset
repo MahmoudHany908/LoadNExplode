@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AblitiesLoadout
   Abilities:
   - {fileID: 5902336837124997032, guid: f8eebceb2dce12f48b7b7d0bc91cb3d3, type: 3}
-  - {fileID: 5902336837124997032, guid: f8eebceb2dce12f48b7b7d0bc91cb3d3, type: 3}
-  - {fileID: 5902336837124997032, guid: f8eebceb2dce12f48b7b7d0bc91cb3d3, type: 3}
-  AbilityKeys: 280000002600000011000000
+  - {fileID: 5902336837124997032, guid: 6a4f47f6ba4c7fe4099baf5a295d6235, type: 3}
+  - {fileID: 5902336837124997032, guid: 61033b75670d5c74281a67f0f1e25a25, type: 3}
+  AbilityKeys: 140000002600000011000000

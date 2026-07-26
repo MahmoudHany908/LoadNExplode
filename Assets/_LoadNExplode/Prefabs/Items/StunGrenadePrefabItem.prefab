@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ability
+  m_text: StunGernade
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -149,10 +149,9 @@ GameObject:
   - component: {fileID: 6428378175722930069}
   - component: {fileID: 5983807016724562560}
   - component: {fileID: 6663852868739069165}
-  - component: {fileID: 2423240370902453617}
-  - component: {fileID: 5091280138472250981}
+  - component: {fileID: 6344422564592656958}
   m_Layer: 0
-  m_Name: HeroinPrefab
+  m_Name: StunGrenadePrefabItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,7 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2022997, g: 0.36527956, b: 0.3735848, a: 1}
+  m_Color: {r: 0.0949448, g: 0.3822133, b: 0.3962264, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -260,7 +259,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2423240370902453617
+--- !u!114 &6344422564592656958
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -269,21 +268,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5902336837124997032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8fe33ba196296b45b412f66848d3252, type: 3}
+  m_Script: {fileID: 11500000, guid: 31989a03edcd2c4429f8b7ed6d94ec53, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameSlotUI
-  data: {fileID: 11400000, guid: caaa202b5b3b7d741ac319e39efe17e0, type: 2}
---- !u!114 &5091280138472250981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5902336837124997032}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9fa537d9d2bbaaf41bf2d2c1a7cdb430, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HeroinItem
-  duration: 5
-  speedMultiplier: 1.75
+  m_EditorClassIdentifier: Assembly-CSharp::StunGrenadeItem
+  grenadePrefab: {fileID: 5090234239201782469, guid: e28612c060222894ea213b26aefedac3, type: 3}
+  throwForce: 12
+  upwardForce: 2
+  throwPoint: {fileID: 0}
+  aimLayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  maxAimDistance: 100

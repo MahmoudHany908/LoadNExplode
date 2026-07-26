@@ -1,9 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-/// <summary>
-/// Heroin / speed boost: raises player move speed for a limited time.
-/// </summary>
+
 public class HeroinItem : MonoBehaviour, IItem, IPlayerReceivable
 {
     [SerializeField] private float duration = 5f;

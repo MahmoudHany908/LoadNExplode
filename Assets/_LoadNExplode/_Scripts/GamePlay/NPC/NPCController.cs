@@ -25,6 +25,10 @@ public class NPCController : MonoBehaviour, ILaunchable
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
 
+        // Apply movement tuning from definition so turns and stops feel natural.
+        agent.angularSpeed = definition.AngularSpeed;
+        agent.acceleration = definition.Acceleration;
+        agent.stoppingDistance = definition.StoppingDistance;
 
         if (eye == null) eye = transform;
         if (player == null)
