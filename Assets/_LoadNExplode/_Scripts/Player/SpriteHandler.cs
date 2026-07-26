@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _LoadNExplode._Scripts.Player
 {
-    public class PlayerSprite : MonoBehaviour
+    public class SpriteHandler : MonoBehaviour
     {
         private Animator anim;
         private SpriteRenderer sprite;

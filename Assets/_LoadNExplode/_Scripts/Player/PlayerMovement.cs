@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour, ILaunchable
     private Player player;
     private Vector3 moveDirection;
     private Collider col;
-    private PlayerSprite sprite;
+    private SpriteHandler sprite;
     private bool isWalking = true;
     [HideInInspector] public Rigidbody rb;
     private float speedMultiplier = 1f;
@@ -55,7 +55,7 @@ public class PlayerMovement : MonoBehaviour, ILaunchable
         player = GetComponent<Player>();
         col = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
-        sprite = GetComponentInChildren<PlayerSprite>();
+        sprite = GetComponentInChildren<SpriteHandler>();
     }
 
     public void SetSpeedMultiplier(float multiplier)

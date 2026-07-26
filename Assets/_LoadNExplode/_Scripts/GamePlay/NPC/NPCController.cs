@@ -1,4 +1,5 @@
 using System.Collections;
+using _LoadNExplode._Scripts.Player;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,20 +11,25 @@ public class NPCController : MonoBehaviour, ILaunchable
     [SerializeField] private Transform eye;                // vision origin - defaults to this transform
     [SerializeField] private Transform player;              // auto-found via "Player" tag if left empty
 
+    private NavMeshAgent agent;
     private NPCContext _context;
     private NPCStateMachine _stateMachine;
     private VisionSensor _vision;
+    private SpriteHandler sprite;
     private float _visionTimer;
 
     [Header("Launch")]
     private Rigidbody rb;
     [SerializeField] private LayerMask groundMask;
     private bool _isLaunched;
+    
+    private bool isWalking = true;
 
     private void Awake()
     {
-        var agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
+        sprite = GetComponentInChildren<SpriteHandler>();
         rb.isKinematic = true;
 
         // Apply movement tuning from definition so turns and stops feel natural.
@@ -54,6 +60,34 @@ public class NPCController : MonoBehaviour, ILaunchable
             States = new NPCStates(),
             SpawnPosition = transform.position
         };
+    }
+    
+    private void HandleSprite()
+    {
+        if (rb.isKinematic) {
+            if (agent.velocity.magnitude > Mathf.Epsilon && !isWalking)
+            {
+                isWalking = true;
+                sprite.SwitchToWalk();
+            }
+            else if (agent.velocity.magnitude == 0 && isWalking)
+            {
+                isWalking = false;
+                sprite.SwitchToIdle();
+            }
+
+            if (agent.velocity.x < 0)
+            {
+                sprite.FlipSprite(true);
+            }
+            else if (agent.velocity.x > 0)
+            {
+                sprite.FlipSprite(false);
+            }
+        } else {
+            isWalking = false;
+            sprite.SwitchToIdle();
+        }
     }
 
     private void Start()
@@ -138,6 +172,8 @@ public class NPCController : MonoBehaviour, ILaunchable
         }
 
         _stateMachine.Tick(_context);
+        
+        HandleSprite();
     }
 
     private void OnDrawGizmosSelected()
