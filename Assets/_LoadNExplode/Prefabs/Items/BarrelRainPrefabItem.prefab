@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: StunGernade
+  m_text: Barrels
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -149,9 +149,9 @@ GameObject:
   - component: {fileID: 6428378175722930069}
   - component: {fileID: 5983807016724562560}
   - component: {fileID: 6663852868739069165}
-  - component: {fileID: 6344422564592656958}
+  - component: {fileID: -6661249334850208504}
   m_Layer: 0
-  m_Name: StunGrenadePrefabItem
+  m_Name: BarrelRainPrefabItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &6344422564592656958
+--- !u!114 &-6661249334850208504
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -268,14 +268,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5902336837124997032}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31989a03edcd2c4429f8b7ed6d94ec53, type: 3}
+  m_Script: {fileID: 11500000, guid: 910f7274f0de29a4fa93580a76408082, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::StunGrenadeItem
-  grenadePrefab: {fileID: 5090234239201782469, guid: e28612c060222894ea213b26aefedac3, type: 3}
-  throwForce: 10
-  upwardForce: 2
-  throwPoint: {fileID: 0}
-  aimLayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  maxAimDistance: 100
+  m_EditorClassIdentifier: Assembly-CSharp::BarrelRain
+  barrelPrefab: {fileID: 3071923945779854156, guid: b2115f46434b7b24eb2b87bd7df9437e, type: 3}
+  totalBarrels: 10
+  duration: 3
+  spawnHeight: 12
+  spawnRadius: 5
+  destroyAfterUse: 1
