@@ -54,10 +54,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Height: 1.5
   m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1596771810084411130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
   _explosionLayers:
     serializedVersion: 2
     m_Bits: 449
-  explosionThreshold: 5
+  explosionThreshold: 3.5
   _explodeEffectsPrefab: {fileID: 6524834328946985667, guid: f33bc1240d97f6c45811b17d72efc80f, type: 3}
   _explosionSound: {fileID: 0}
 --- !u!54 &2345817636285311137

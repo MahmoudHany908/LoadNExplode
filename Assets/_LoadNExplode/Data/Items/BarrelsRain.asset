@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c3f4579a390b2542b576be69ab915e8, type: 3}
   m_Name: BarrelsRain
   m_EditorClassIdentifier: Assembly-CSharp::ItemMetadata
-  itemName: StunGernade
-  icon: {fileID: 21300000, guid: 246f597a3ef877540be469acf73d3dd9, type: 3}
-  price: 4
-  itemPrefab: {fileID: 5902336837124997032, guid: 8f5213c59b1e45b4e8e6eca4f21daacd, type: 3}
+  itemName: BarrelRain
+  icon: {fileID: 21300000, guid: 6efcd73294fd717468d604373ab35004, type: 3}
+  price: 12
+  itemPrefab: {fileID: 5902336837124997032, guid: c4c38117d894b8040a978349a57f4ed4, type: 3}
