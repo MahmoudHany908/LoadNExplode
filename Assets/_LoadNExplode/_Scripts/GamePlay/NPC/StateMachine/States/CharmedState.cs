@@ -19,9 +19,13 @@ public class CharmedState : INPCState
 
     public void Enter(NPCContext ctx)
     {
-        ctx.Agent.isStopped = false;
-        ctx.Agent.speed = ctx.Definition.CharmedMovementSpeed;
-        _charmedTimer = _charmedDuration;
+        if (ctx.Agent != null && ctx.Agent.isOnNavMesh)
+        {
+            ctx.Agent.isStopped = false;
+            ctx.Agent.speed = ctx.Definition.CharmedMovementSpeed;
+            _charmedTimer = _charmedDuration;
+        }
+
     }
 
     public void Tick(NPCContext ctx)

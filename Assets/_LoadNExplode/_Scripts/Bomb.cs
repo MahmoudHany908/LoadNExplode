@@ -19,19 +19,81 @@ public class Bomb : MonoBehaviour
     [SerializeField] private AudioClip _tickingSound;
 
     private Transform _parent;
+    private bool _isDefused = false;
 
-    private void Start()
+    private Coroutine _countdownCoroutine;
+
+    // CHANGED: moved init logic from Start() to Awake() so it's guaranteed
+    // to run before Player.Start() calls TriggerExplosion() on it.
+    private void Awake()
     {
         _parent = transform.parent;
         PositionCountdownText();
+        _countdownText.color = Color.white;
     }
-
 
     public void TriggerExplosion(float timeToExplode)
     {
-        bombVisual.transform.localScale = Vector3.one * _explosionRadius;
+        _isDefused = false;
+        _countdownText.color = Color.red;
 
-        StartCoroutine(CountdownAndExplodeCoroutine(timeToExplode));
+        if (_countdownCoroutine != null)
+        {
+            StopCoroutine(_countdownCoroutine);
+        }
+
+        if (_countdownText != null)
+        {
+            _countdownText.color = Color.white;
+        }
+
+        // CHANGED: SetActive(false) -> SetActive(true).
+        // This visual is meant to represent the bomb during the countdown,
+        // so it should turn ON here, not off.
+        if (bombVisual != null)
+        {
+            bombVisual.SetActive(true);
+            Vector3 currentScale = bombVisual.transform.localScale;
+            bombVisual.transform.localScale = new Vector3(_explosionRadius * 2f, currentScale.y, _explosionRadius * 2f);
+        }
+
+        _countdownCoroutine = StartCoroutine(CountdownAndExplodeCoroutine(timeToExplode));
+    }
+
+    public void Defuse(string txt = "DEFUSED")
+    {
+        if (_isDefused) return;
+
+        _isDefused = true;
+
+        if (_countdownCoroutine != null)
+        {
+            StopCoroutine(_countdownCoroutine);
+            _countdownCoroutine = null;
+        }
+
+        if (_countdownText != null)
+        {
+            _countdownText.text = txt;
+            _countdownText.color = Color.green;
+        }
+
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if (audioSource != null && audioSource.isPlaying)
+        {
+            audioSource.Stop();
+        }
+
+        // CHANGED: removed Destroy(gameObject, 1). Destroying the bomb here
+        // permanently breaks it, since Player caches its `bomb` reference
+        // once in Awake() and never re-fetches it. After one defuse, every
+        // future TriggerExplosion() call on respawn was silently doing
+        // nothing because `bomb` pointed to a destroyed object.
+        // Just hide the visual instead so the same Bomb component can be reused.
+        if (bombVisual != null)
+        {
+            bombVisual.SetActive(false);
+        }
     }
 
     private IEnumerator CountdownAndExplodeCoroutine(float totalTime)
@@ -40,15 +102,24 @@ public class Bomb : MonoBehaviour
 
         while (remainingTime > 0f)
         {
+            if (_isDefused)
+            {
+                yield break;
+            }
+
             if (_countdownText != null)
             {
                 _countdownText.text = remainingTime.ToString("F2");
             }
 
-            yield return null; // Wait for next frame
+            yield return null;
             remainingTime -= Time.deltaTime;
         }
 
+        if (_isDefused)
+        {
+            yield break;
+        }
 
         if (_countdownText != null)
         {
@@ -65,12 +136,10 @@ public class Bomb : MonoBehaviour
             AudioSource.PlayClipAtPoint(_explosionSound, transform.position);
         }
 
-
         if (_explodeEffectsPrefab != null)
         {
             Instantiate(_explodeEffectsPrefab, transform.position, Quaternion.identity);
         }
-
 
         Collider[] colliders = Physics.OverlapSphere(transform.position, _explosionRadius);
         foreach (Collider collider in colliders)
@@ -81,6 +150,10 @@ public class Bomb : MonoBehaviour
             }
         }
 
+        if (bombVisual != null && !_destroyOnExplode)
+        {
+            bombVisual.SetActive(false);
+        }
 
         if (_destroyOnExplode)
         {
@@ -91,7 +164,6 @@ public class Bomb : MonoBehaviour
     private void PositionCountdownText()
     {
         if (_countdownText == null || _parent == null) return;
-
 
         Collider parentCollider = _parent.GetComponent<Collider>();
 

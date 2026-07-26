@@ -1,8 +1,9 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
-public class NPCController : MonoBehaviour
+[RequireComponent(typeof(NavMeshAgent), typeof(Rigidbody))]
+public class NPCController : MonoBehaviour, ILaunchable
 {
     [SerializeField] private NPCDefinition definition;
     [SerializeField] private Transform eye;                // vision origin - defaults to this transform
@@ -13,10 +14,21 @@ public class NPCController : MonoBehaviour
     private VisionSensor _vision;
     private float _visionTimer;
 
+    [Header("Launch")]
+    private Rigidbody rb;
+    [SerializeField] private LayerMask groundMask;
+    private bool _isLaunched;
 
     private void Awake()
     {
         var agent = GetComponent<NavMeshAgent>();
+        rb = GetComponent<Rigidbody>();
+        rb.isKinematic = true;
+
+        // Apply movement tuning from definition so turns and stops feel natural.
+        agent.angularSpeed = definition.AngularSpeed;
+        agent.acceleration = definition.Acceleration;
+        agent.stoppingDistance = definition.StoppingDistance;
 
         if (eye == null) eye = transform;
         if (player == null)
@@ -59,8 +71,64 @@ public class NPCController : MonoBehaviour
         _stateMachine.ChangeState(_context.States.Stunned, _context);
     }
 
+
+    #region launch
+    public void Launch(Vector3 velocity, LaunchApplyMode mode, LaunchPad source)
+    {
+        if (rb == null) return;
+        StartCoroutine(LaunchRoutine(velocity, mode));
+        Debug.Log("Launch");
+    }
+
+    private IEnumerator LaunchRoutine(Vector3 velocity, LaunchApplyMode mode)
+    {
+        _isLaunched = true;
+        var agent = GetComponent<NavMeshAgent>();
+        agent.enabled = false;
+        rb.isKinematic = false;
+
+        switch (mode)
+        {
+            case LaunchApplyMode.SetVelocityDirect:
+                rb.linearVelocity = velocity;
+                break;
+            case LaunchApplyMode.VelocityChange:
+                rb.AddForce(velocity, ForceMode.VelocityChange);
+                break;
+            case LaunchApplyMode.Impulse:
+                rb.AddForce(velocity, ForceMode.Impulse);
+                break;
+        }
+
+        // Require the NPC to actually leave the ground before we start checking for landing,
+        // so we don't instantly snap back on the same frame we launched.
+        float minAirTime = 0.2f;
+        float maxAirTime = 5f; // safety net so it can never get stuck airborne forever
+        float timer = 0f;
+
+        while (timer < minAirTime)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        while (!Physics.Raycast(transform.position, Vector3.down, 1.3f, groundMask) && timer < maxAirTime)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        rb.isKinematic = true;
+        agent.enabled = true;
+        agent.Warp(transform.position);
+        _isLaunched = false;
+    }
+    #endregion
+
     private void Update()
     {
+        if (_isLaunched) return;
+
         _visionTimer -= Time.deltaTime;
         if (_visionTimer <= 0f)
         {

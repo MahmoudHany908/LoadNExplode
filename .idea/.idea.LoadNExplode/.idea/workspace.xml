@@ -1,49 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="49b487ae-0869-413b-844a-9b46477d88a6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/PC_RPAsset.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/PC_RPAsset.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Settings/SampleSceneProfile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Settings/SampleSceneProfile.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTestScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Shaders/Shaders/SpriteShader/CustomSpriteMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Shaders/Shaders/SpriteShader/CustomSpriteMaterial.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Shaders/Shaders/SpriteShader/CustomSpriteShader.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Shaders/Shaders/SpriteShader/CustomSpriteShader.shadergraph" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.LoadNExplode/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LoadNExplode/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Sprites/UI/BombMask.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Sprites/UI/BombMask.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Sprites/UI/BombMask.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Sprites/UI/BombMask.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Sprites/UI/BombPattern.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Sprites/UI/BombPattern.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Sprites/UI/BombPattern.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Sprites/UI/BombPattern.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/SceneLoader.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/SceneLoader.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/UI/LoadingScreenCanvasPrefab.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/UI/LoadingScreenCanvasPrefab.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTest/AbdoMainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTest/AbdoMainMenuScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Core/SceneLoading/LoadingScreen.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Core/SceneLoading/LoadingScreen.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Core/SceneLoading/SceneLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Core/SceneLoading/SceneLoader.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.kyrylokuzyk.primetween@d4fabb15325a/Runtime/Internal/PrimeTweenManager.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Programs/Unity/6000.3.15f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.render-pipelines.core/Runtime/Common/ComponentSingleton.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Programs/Unity/6000.3.15f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.render-pipelines.core/Runtime/Debugging/DebugUpdater.cs" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="3GxBGYKMPoUtPQS1JqjaFZWzBRz" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\Abdo\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache",
-      "C:\\Users\\Abdo\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache",
-      "C:\\Users\\Abdo\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\Abdo\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\Abdo\\AppData\\Roaming\\JetBrains\\Rider2023.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\Abdo\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="D:\Programs\Unity\6000.3.15f1\Editor\Unity.exe" />
@@ -91,6 +107,15 @@
       <option name="presentableId" value="Default" />
       <updated>1784903247998</updated>
       <workItem from="1784903251720" duration="29000" />
+      <workItem from="1784921568837" duration="22000" />
+      <workItem from="1784921898850" duration="1000" />
+      <workItem from="1784968360202" duration="637000" />
+      <workItem from="1784970569487" duration="601000" />
+      <workItem from="1784988072456" duration="503000" />
+      <workItem from="1784988729393" duration="1863000" />
+      <workItem from="1784992890443" duration="760000" />
+      <workItem from="1785001313585" duration="1481000" />
+      <workItem from="1785006902341" duration="6595000" />
     </task>
     <servers />
   </component>

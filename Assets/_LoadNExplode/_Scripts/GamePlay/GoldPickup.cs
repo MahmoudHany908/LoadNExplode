@@ -4,21 +4,23 @@ public class GoldPickup : MonoBehaviour
 {
     [SerializeField] private int amount = 1;
 
-    public void SetAmount(int value)
+    private GoldManager goldManager;
+
+    public void SetAmount(int value, GoldManager goldManager)
     {
         amount = Mathf.Max(0, value);
+        this.goldManager = goldManager;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.TryGetComponent(out Player player))
-            return;
+        if (other.TryGetComponent(out Player player))
+        {
+            goldManager.AddGold(amount);
+            Destroy(gameObject);
+        }
 
-        GoldManager goldManager = FindFirstObjectByType<GoldManager>();
-        if (goldManager == null)
-            return;
 
-        goldManager.AddGold(amount);
-        Destroy(gameObject);
+
     }
 }

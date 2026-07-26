@@ -3,6 +3,7 @@ using UnityEngine;
 public class GoldManager : MonoBehaviour
 {
     [SerializeField] private int startingGold;
+    [SerializeField] private GameObject goldPickupPrefab;
 
     public int Gold { get; private set; }
 
@@ -15,6 +16,25 @@ public class GoldManager : MonoBehaviour
     {
         EventBus.Publish(new GoldChangedEvent(Gold));
     }
+    private void OnEnable()
+    {
+        EventBus.Subscribe<EnemyDeathEvent>(OnEnemyDeath);
+    }
+
+    private void OnDisable()
+    {
+        EventBus.Unsubscribe<EnemyDeathEvent>(OnEnemyDeath);
+    }
+
+    private void OnEnemyDeath(EnemyDeathEvent evt)
+    {
+        if (evt.GoldReward <= 0)
+            return;
+        GameObject pickup = Instantiate(goldPickupPrefab, evt.DeathPosition, Quaternion.identity);
+        pickup.GetComponent<GoldPickup>().SetAmount(evt.GoldReward, this);
+    }
+
+
 
     public bool TrySpend(int amount)
     {

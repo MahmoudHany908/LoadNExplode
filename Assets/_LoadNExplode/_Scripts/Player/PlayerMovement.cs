@@ -1,7 +1,8 @@
+using _LoadNExplode._Scripts.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, ILaunchable
 {
     [Header("MovementVariables")]
     [SerializeField] private float MoveSpeed;
@@ -22,14 +23,39 @@ public class PlayerMovement : MonoBehaviour
     private Player player;
     private Vector3 moveDirection;
     private Collider col;
-    private Rigidbody rb;
+    private PlayerSprite sprite;
+    private bool isWalking = true;
+    [HideInInspector] public Rigidbody rb;
     private float speedMultiplier = 1f;
+
+    [Header("Launch")]
+    [SerializeField] private float launchControlLockTime = 0.3f;
+    private float _launchLockTimer;
+
+
+    public void Launch(Vector3 velocity, LaunchApplyMode mode, LaunchPad source)
+    {
+        switch (mode)
+        {
+            case LaunchApplyMode.SetVelocityDirect:
+                rb.linearVelocity = velocity;
+                break;
+            case LaunchApplyMode.VelocityChange:
+                rb.AddForce(velocity, ForceMode.VelocityChange);
+                break;
+            case LaunchApplyMode.Impulse:
+                rb.AddForce(velocity, ForceMode.Impulse);
+                break;
+        }
+        _launchLockTimer = launchControlLockTime;
+    }
 
     void Start()
     {
         player = GetComponent<Player>();
         col = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
+        sprite = GetComponentInChildren<PlayerSprite>();
     }
 
     public void SetSpeedMultiplier(float multiplier)
@@ -44,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Keyboard.current.leftShiftKey.IsPressed())
         {
-            //ApplyMovement(MoveSpeed * sprintMuiltiplair);  sprint add or remove
+            ApplyMovement(MoveSpeed * sprintMuiltiplair * speedMultiplier);
         }
         else
         {
@@ -52,21 +78,60 @@ public class PlayerMovement : MonoBehaviour
 
         }
 
+        HandleSprite();
+
     }
+
+
+    private void HandleSprite()
+    {
+        if (moveDirection.magnitude > Mathf.Epsilon && !isWalking)
+        {
+            isWalking = true;
+            sprite.SwitchToWalk();
+            //TODO: osama, see what yo uwant to do here....
+        }
+        else if (moveDirection.magnitude == 0 && isWalking)
+        {
+            isWalking = false;
+            sprite.SwitchToIdle();
+        }
+
+        if (moveDirection.x < 0)
+        {
+            sprite.FlipSprite(true);
+        }
+        else if (moveDirection.x > 0)
+        {
+            sprite.FlipSprite(false);
+        }
+    }
+
+
+
+
     private void ApplyMovement(float speed)
     {
+        if (_launchLockTimer > 0f)
+        {
+            _launchLockTimer -= Time.fixedDeltaTime;
+            return;
+        }
+
         if (IsGrounded())
         {
 
             Vector3 targetVelocity = moveDirection * speed;
             targetVelocity.y = rb.linearVelocity.y;
-            rb.linearVelocity = targetVelocity;
-
+            if (!rb.isKinematic)
+                rb.linearVelocity = targetVelocity;
         }
         if (!IsGrounded())
         {
             rb.AddForce(Vector3.down * downwordForce, ForceMode.VelocityChange);
         }
+
+
     }
 
 

@@ -6,10 +6,7 @@ using UnityEngine.Serialization;
 public class GamePlayManager : MonoBehaviour
 {
     [FormerlySerializedAs("deathUIPrefab")]
-    [SerializeField] private GameObject spawnMapUI;
-    [SerializeField] private GameObject shopUI;
     [SerializeField] private GameObject DeathPanelUI;
-
     [SerializeField] private GameObject runEndUI;
 
     private Player _palyer;
@@ -17,6 +14,7 @@ public class GamePlayManager : MonoBehaviour
     private void OnEnable()
     {
         EventBus.Subscribe<PlayerDeathEvent>(OnPlayerDeath);
+        EventBus.Subscribe<PlayerWasTakenDownEvent>(OnPlayerDeath);
         EventBus.Subscribe<RequestSpawnEvent>(OnSpawnRequested);
 
         EventBus.Subscribe<OnCountdownFinishedEvent>(OnCountdownFinished);
@@ -25,6 +23,7 @@ public class GamePlayManager : MonoBehaviour
     private void OnDisable()
     {
         EventBus.Unsubscribe<PlayerDeathEvent>(OnPlayerDeath);
+        EventBus.Unsubscribe<PlayerWasTakenDownEvent>(OnPlayerDeath);
         EventBus.Unsubscribe<RequestSpawnEvent>(OnSpawnRequested);
 
 
@@ -36,10 +35,26 @@ public class GamePlayManager : MonoBehaviour
     private void OnCountdownFinished(OnCountdownFinishedEvent evt)
     {
         Time.timeScale = 0;
-        Instantiate(runEndUI);
-        int currentKills = GameScoreManager.Instance.CurrentKills;
-        string savedName = PlayerPrefs.GetString("SavedPlayerName", "Unknown");
-        GameScoreManager.Instance.EndRun(savedName);
+
+        if (runEndUI != null)
+        {
+            Instantiate(runEndUI);
+        }
+        else
+        {
+            Debug.LogWarning("runEndUI is not assigned on GamePlayManager.", this);
+        }
+
+        if (GameScoreManager.Instance != null)
+        {
+            int currentKills = GameScoreManager.Instance.CurrentKills;
+            string savedName = PlayerPrefs.GetString("SavedPlayerName", "Unknown");
+            GameScoreManager.Instance.EndRun(savedName);
+        }
+        else
+        {
+            Debug.LogError("GameScoreManager.Instance is null! This usually happens if you play the GamePlay scene directly in the Editor without passing through the MainMenu scene where it is created.", this);
+        }
     }
 
     private void OnRestartGameButtonPressed(OnRestartGameButtonPressedEvent evt)
@@ -54,11 +69,11 @@ public class GamePlayManager : MonoBehaviour
     {
         _palyer = evt.Player;
         StartCoroutine(ToggleDeathPanel(true, 1.5f));
-
-        if (spawnMapUI != null)
-            spawnMapUI.SetActive(true);
-        if (shopUI != null)
-            shopUI.SetActive(true);
+    }
+    private void OnPlayerDeath(PlayerWasTakenDownEvent evt)
+    {
+        _palyer = evt.Player;
+        StartCoroutine(ToggleDeathPanel(true, 1.5f));
     }
 
     private void OnSpawnRequested(RequestSpawnEvent evt)
@@ -67,8 +82,6 @@ public class GamePlayManager : MonoBehaviour
 
         Time.timeScale = 1f;
 
-        if (spawnMapUI != null) spawnMapUI.SetActive(false);
-        if (shopUI != null) shopUI.SetActive(false);
 
         _palyer.GetPlayerMovement().enabled = true;
         _palyer.Respawn(evt.SpawnPoint.position);
