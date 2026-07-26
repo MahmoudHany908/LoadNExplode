@@ -1,4 +1,5 @@
 using System.Collections;
+using _LoadNExplode._Scripts.Audio;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -112,7 +113,7 @@ public class Player : UnitBase
             rb.linearVelocity = Vector3.zero;
             rb.isKinematic = true;
         }
-
+        
         if (deathEffects == null) return;
 
         GameObject deathEffectInstance = Instantiate(deathEffects, transform.position, Quaternion.identity);

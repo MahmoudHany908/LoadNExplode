@@ -1,3 +1,4 @@
+using _LoadNExplode._Scripts.Audio;
 using UnityEngine;
 
 public class GoldPickup : MonoBehaviour
@@ -16,6 +17,8 @@ public class GoldPickup : MonoBehaviour
     {
         if (other.TryGetComponent(out Player player))
         {
+            Debug.Log("play coin");
+            MusicManager.Instance.PlayCoin();
             goldManager.AddGold(amount);
             Destroy(gameObject);
         }

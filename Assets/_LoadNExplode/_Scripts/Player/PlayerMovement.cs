@@ -1,3 +1,4 @@
+using _LoadNExplode._Scripts.Audio;
 using _LoadNExplode._Scripts.Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -27,6 +28,11 @@ public class PlayerMovement : MonoBehaviour, ILaunchable
     private bool isWalking = true;
     [HideInInspector] public Rigidbody rb;
     private float speedMultiplier = 1f;
+    
+    [Header("Footstep Audio")]
+    [SerializeField] private float walkFootstepDelay = 0.45f;
+    [SerializeField] private float sprintFootstepDelay = 0.3f;
+    private float footstepTimer;
 
     [Header("Launch")]
     [SerializeField] private float launchControlLockTime = 0.3f;
@@ -120,7 +126,8 @@ public class PlayerMovement : MonoBehaviour, ILaunchable
 
         if (IsGrounded())
         {
-
+            
+            HandleFootsteps();
             Vector3 targetVelocity = moveDirection * speed;
             targetVelocity.y = rb.linearVelocity.y;
             if (!rb.isKinematic)
@@ -132,6 +139,26 @@ public class PlayerMovement : MonoBehaviour, ILaunchable
         }
 
 
+    }
+
+    private void HandleFootsteps() {
+        var delay = Keyboard.current.leftShiftKey.IsPressed() ? sprintFootstepDelay : walkFootstepDelay;
+        if (isWalking)
+        {
+            footstepTimer -= Time.fixedDeltaTime;
+
+            if (footstepTimer <= 0f)
+            {
+                MusicManager.Instance.PlayFootstep();
+
+                footstepTimer = delay;
+            }
+        }
+        else
+        {
+            // Play immediately when the player starts moving again.
+            footstepTimer = 0f;
+        }
     }
 
 

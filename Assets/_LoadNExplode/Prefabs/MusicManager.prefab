@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5219565871680012440
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3790206149486543354}
+  - component: {fileID: 7602795631646485104}
+  m_Layer: 0
+  m_Name: MusicManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &3790206149486543354
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5219565871680012440}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7602795631646485104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5219565871680012440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8183ae1cded8441f80aa0582fe708f18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_LoadNExplode._Scripts.Audio.MusicManager
+  MainMenu: {fileID: 8300000, guid: dd77af0c5cf29094097d12fc910143bc, type: 3}
+  GameLoop: {fileID: 8300000, guid: 988462f41294fad4e890be6bee4d2429, type: 3}
+  AccGameLoop: {fileID: 8300000, guid: ee2bb96ea5519d04c802de8e1823a002, type: 3}
+  footsteps:
+  - {fileID: 8300000, guid: c790cf782b8877c4cad921c5e2bc464e, type: 3}
+  - {fileID: 8300000, guid: 56320e1530c07d249928a02f6d7a062a, type: 3}
+  - {fileID: 8300000, guid: f0267d9d9041a4c4cad4c395cb7313c9, type: 3}
+  - {fileID: 8300000, guid: ddc8a46ea0494bc4fb0c8ebf334b34b7, type: 3}
+  - {fileID: 8300000, guid: 7e4f4450b0e5c8e4cb76009f0c889e50, type: 3}
+  - {fileID: 8300000, guid: cf75a48d3d6180640ab467e5e91dfbf3, type: 3}
+  - {fileID: 8300000, guid: 353b67e63e3c66e468a5f624ce8c4ac1, type: 3}
+  - {fileID: 8300000, guid: d15c45ed4235b264fa136d74a81efb6e, type: 3}
+  Explosion: {fileID: 8300000, guid: 79f47b2b50b2e91408f581779a177576, type: 3}
+  Death: {fileID: 8300000, guid: fd7abab2fe74c5a4cadf3a14da2687c1, type: 3}
+  Coin: {fileID: 8300000, guid: 9daa9b7e718a9c74e89f85f224049c64, type: 3}

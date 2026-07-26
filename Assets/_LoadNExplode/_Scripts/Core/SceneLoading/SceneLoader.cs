@@ -1,4 +1,5 @@
 using System.Collections;
+using _LoadNExplode._Scripts.Audio;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -56,6 +57,12 @@ public class SceneLoader : MonoBehaviour
         EventBus.Publish(new SceneLoadStartEvent(sceneName));
 
         yield return loadingScreen.ShowAsync();
+
+        if (sceneName == "GameScene") {
+            MusicManager.Instance.PlayGameLoopMusic(); //this is not good code, but good for now
+        } else if (sceneName == "MainMenuScene") {
+            MusicManager.Instance.PlayMainMenuMusic();
+        }
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
         

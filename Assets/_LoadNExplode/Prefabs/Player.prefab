@@ -908,7 +908,7 @@ MonoBehaviour:
   _explodeEffectsPrefab: {fileID: 6524834328946985667, guid: f33bc1240d97f6c45811b17d72efc80f, type: 3}
   bombVisual: {fileID: 3809495214417494716}
   _countdownText: {fileID: 3369974805861981319}
-  _explosionSound: {fileID: 0}
+  _explosionSound: {fileID: 8300000, guid: 79f47b2b50b2e91408f581779a177576, type: 3}
   _tickingSound: {fileID: 0}
 --- !u!1001 &7907588565643264297
 PrefabInstance:
