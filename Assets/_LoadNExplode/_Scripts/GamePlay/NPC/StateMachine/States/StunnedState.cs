@@ -17,7 +17,7 @@ public class StunnedState : INPCState
 
     public void Enter(NPCContext ctx)
     {
-        if (ctx.Agent != null)
+        if (ctx.Agent != null && ctx.Agent.isOnNavMesh)
         {
             ctx.Agent.isStopped = true;
             ctx.Agent.ResetPath();

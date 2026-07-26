@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: NPCDefinitionCivilian
   m_EditorClassIdentifier: Assembly-CSharp::NPCDefinition
   Behavior: 0
-  PatrolSpeed: 3
+  PatrolSpeed: 6.5
   ChaseSpeed: 6
-  FleeSpeed: 5
+  FleeSpeed: 8
   CharmedMovementSpeed: 2.5
   PatrolRadius: 30
   VisionRange: 10
-  VisionFOVAngle: 120
+  VisionFOVAngle: 150
   VisionCheckInterval: 0.15
   TargetMask:
     serializedVersion: 2
