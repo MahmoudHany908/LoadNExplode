@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _LoadNExplode._Scripts.Audio;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using PrimeTween;
 
@@ -20,6 +21,7 @@ namespace _LoadNExplode._Scripts.UI.CursorUI
                 // worldPos.z = 0f; 
                 SpawnClickVFX(transform.position);
                 Shake();
+                MusicManager.Instance.PlayExplosion(0.1f);
                 //Audio 
                 //Screenshake
             }

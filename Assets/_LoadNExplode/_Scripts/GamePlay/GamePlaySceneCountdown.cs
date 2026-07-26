@@ -1,3 +1,4 @@
+using _LoadNExplode._Scripts.Audio;
 using UnityEngine;
 
 
@@ -5,10 +6,11 @@ public class GamePlaySceneCountdown : MonoBehaviour
 {
     [Header("Countdown Settings")]
     [SerializeField] private float countdownDuration = 10f;
+    [SerializeField] private float playAccMusicAfter = 10f;
 
 
 
-
+    private bool isAccelarted = false;
     private float timeRemaining;
     private bool isCountingDown = true;
 
@@ -34,6 +36,16 @@ public class GamePlaySceneCountdown : MonoBehaviour
             OnCountdownFinished();
         }
 
+        if (timeRemaining < playAccMusicAfter) {
+            HandleAccMusic();
+        }
+
+    }
+
+    private void HandleAccMusic() {
+        if (isAccelarted) return;
+        isAccelarted = true;
+        MusicManager.Instance.PlayAccGameLoopMusic();
     }
 
     private void OnCountdownFinished()

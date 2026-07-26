@@ -6,23 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="49b487ae-0869-413b-844a-9b46477d88a6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LoadNExplode/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LoadNExplode/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/SourGummy-Bold SDF.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/SourGummy-Bold SDF.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Animations/IdleAnimation.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Animations/IdleAnimation.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Animations/PlayerAnimationController.controller" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Animations/PlayerAnimationController.controller.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Animations/WalkAnimation.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Assets/Animations/WalkAnimation.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/NPCs/NPC.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/NPCs/NPC.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/NPCs/Police.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/NPCs/Police.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Exlosive Barrel.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Exlosive Barrel.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Prefabs/Player.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTest/AbdoMainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTest/AbdoMainMenuScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTest/AbdoTestScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/AbdoTest/AbdoTestScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/GameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/GamePlay/NPC/NPCController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/GamePlay/NPC/NPCController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/MainMenuScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/MainMenuScene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/MainMenuScene.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/Scenes/MainMenuScene.unity.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Core/SceneLoading/SceneLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Core/SceneLoading/SceneLoader.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/GamePlay/GamePlaySceneCountdown.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/GamePlay/GamePlaySceneCountdown.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Player/Player.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Player/Player.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Player/PlayerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Player/PlayerMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Player/PlayerSprite.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Player/SpriteHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Player/PlayerSprite.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/Player/SpriteHandler.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/UI/CursorUI/CursorClickUI.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_LoadNExplode/_Scripts/UI/CursorUI/CursorClickUI.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,6 +29,9 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.kyrylokuzyk.primetween@d4fabb15325a/Runtime/Internal/PrimeTweenManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Programs/Unity/6000.3.15f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.render-pipelines.core/Runtime/Common/ComponentSingleton.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../../../Programs/Unity/6000.3.15f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.render-pipelines.core/Runtime/Debugging/DebugUpdater.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Programs/Unity/6000.3.15f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.render-pipelines.core/Runtime/Debugging/Prefabs/Scripts/DebugUIHandlerValue.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Programs/Unity/6000.3.15f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.shadergraph/Editor/ShaderGraphShortcuts.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../../../../Programs/Unity/6000.3.15f1/Editor/Data/Resources/PackageManager/BuiltInPackages/com.unity.shadergraph/Samples~/UGUIShaders/Scripts/Timer.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
